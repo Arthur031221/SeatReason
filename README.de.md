@@ -12,7 +12,7 @@ Die Wünsche einer Lehrkraft können zusammen unmöglich sein, und die meisten P
 
 ![Ein Konflikt in der Beispielklasse, ein reparierter Plan mit umrandeten geänderten Plätzen, dann eine Handbewegung, die einen festen Platz verletzt und rückgängig gemacht wird](assets/demo.gif)
 
-Dies ist eine statische Web-App. Namen bleiben im Browser, nichts wird hochgeladen.
+Dies ist eine statische Web-App. Namen bleiben im Browser, nichts wird hochgeladen. Nach dem ersten Besuch öffnet sie sich auch ohne Netz, und der Browser kann sie als App installieren.
 
 ## Vorher und nachher
 

@@ -12,7 +12,7 @@ Las peticiones de un docente pueden ser imposibles a la vez, y casi todos los pl
 
 ![Un conflicto en la clase de ejemplo, un plan reparado con los asientos cambiados marcados con un borde, y luego un movimiento manual que rompe un asiento fijo y se deshace](assets/demo.gif)
 
-Es una aplicación web estática. Los nombres se quedan en el navegador y no se sube nada.
+Es una aplicación web estática. Los nombres se quedan en el navegador y no se sube nada. Tras la primera visita se abre sin conexión y el navegador puede instalarla como aplicación.
 
 ## Antes y después
 

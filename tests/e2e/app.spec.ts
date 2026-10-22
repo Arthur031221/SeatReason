@@ -363,3 +363,16 @@ test("fixing a seat again moves the earlier fixed seat of that pupil", async ({
   await page.getByRole("button", { name: "Fix Zoe in this seat" }).click();
   await expect(rules).toHaveCount(1);
 });
+
+test("the app opens again with the network gone", async ({ page, context }) => {
+  await page.evaluate(() => navigator.serviceWorker.ready.then(() => true));
+  await page.reload();
+  await expect
+    .poll(() => page.evaluate(() => !!navigator.serviceWorker.controller))
+    .toBe(true);
+  await context.setOffline(true);
+  await page.reload();
+  await expect(page.locator(".seat").first()).toBeVisible();
+  await page.getByRole("button", { name: /Shuffle/ }).click();
+  await context.setOffline(false);
+});

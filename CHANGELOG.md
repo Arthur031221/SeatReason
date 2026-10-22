@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+- The app opens without a network after the first visit, and can be installed from the browser
+- Web app manifest with icons
+- A test that reloads the page offline and still plans
+- Project files from 0.3.0 open unchanged
+
 ## 0.3.0
 
 - New request "Sit together": two pupils who must sit next to each other, with the same minimal conflict and repair previews as the other kinds

@@ -12,7 +12,7 @@ A teacher's requests can be impossible together, and most planners just say "no 
 
 ![A conflict in the example class, a repaired plan with changed seats outlined, then a hand-made move that breaks a fixed seat and is undone](assets/demo.gif)
 
-It's a static web app. Names stay in the browser and nothing is uploaded.
+It's a static web app. Names stay in the browser and nothing is uploaded. After the first visit it opens without a network, and your browser can install it as an app.
 
 ## Before and after
 
@@ -48,7 +48,7 @@ The "Front row squeeze" example: 24 pupils, a 5 by 6 room with two missing desks
 | `src/ui/`, `src/style.css`    | Interface, seat map, print sheet, light and dark themes                            |
 | `src/locales/`                | Nine locale files and a test that they share the same keys                         |
 | `tests/e2e/`                  | Browser tests against the built app                                                |
-| `scripts/`                    | Benchmark, demo recorder, social card renderer                                     |
+| `scripts/`                    | Benchmark, demo recorder, social card and icon renderers, offline worker template  |
 | `docs/`                       | Install, usage, config and architecture notes                                      |
 
 ## Installation
@@ -126,7 +126,7 @@ The tests compare the solver with an exhaustive search on small rooms. They also
 ## Limits
 
 - A request set of many mutual keep-apart pairs in a tight room can be too hard for the 8 second limit. The page then says "inconclusive" and doesn't claim the rules are impossible. Nine pupils who must all be kept apart in a 4 by 4 room is one such case.
-- Keep apart means orthogonal neighbours. Diagonal seats are allowed. Sit together needs the same kind of neighbour, so a diagonal seat does not count.
+- Keep apart means orthogonal neighbours. Diagonal seats are allowed. Sit together needs the same kind of neighbour, so a diagonal seat doesn't count.
 - The repair preview tries one request at a time. It doesn't search for the repair that changes the fewest seats.
 - Only four kinds of request exist. There's no gender balance, no group seating and no rotation. Sitting together means next to each other, not in the same group.
 

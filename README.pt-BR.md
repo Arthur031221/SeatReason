@@ -12,7 +12,7 @@ Os pedidos de um professor podem ser impossíveis juntos, e a maioria dos planej
 
 ![Um conflito na turma de exemplo, um mapa reparado com os assentos alterados contornados e, em seguida, um movimento manual que quebra um assento fixo e é desfeito](assets/demo.gif)
 
-É um aplicativo web estático. Os nomes ficam no navegador e nada é enviado.
+É um aplicativo web estático. Os nomes ficam no navegador e nada é enviado. Depois da primeira visita, abre sem rede e o navegador pode instalá-lo como aplicativo.
 
 ## Antes e depois
 

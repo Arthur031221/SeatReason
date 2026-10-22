@@ -19,7 +19,7 @@ SeatReason has no config file and no environment variables. Everything is set in
 | `seatreason.theme`   | `auto`, `light` or `dark`                 |
 | `seatreason.locale`  | One of the nine locale codes              |
 
-Clearing site data in the browser removes all three.
+The offline copy of the app is kept in a cache named `seatreason-` plus a build hash. Clearing site data in the browser removes all three keys and the cached copy.
 
 ## Languages
 

@@ -1,6 +1,6 @@
 {
   "name": "seatreason",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A private classroom seating planner that shows which rules cannot all hold and verifies a repair before you print.",
   "private": false,
   "type": "module",

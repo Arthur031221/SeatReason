@@ -19,6 +19,10 @@ npm start
 
 `npm start` builds the app and starts `vite preview`, which serves it at `http://127.0.0.1:4173/`.
 
+## Offline use and install
+
+The build writes `dist/sw.js`, a service worker that caches the page, its scripts and its icons on the first visit. After that the app opens with no network, and the browser can offer to install it. Page loads still go to the network first, so a new version arrives on the next online visit. The worker is registered only in a production build, never under `npm run dev`. To remove the cached copy, clear site data in the browser.
+
 ## Host it
 
 ```sh

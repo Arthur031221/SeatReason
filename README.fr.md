@@ -12,7 +12,7 @@ Les demandes d'un enseignant peuvent être impossibles ensemble, et la plupart d
 
 ![Un conflit dans la classe d'exemple, un plan réparé avec les places modifiées entourées, puis un déplacement manuel qui brise une place fixe et qu'on annule](assets/demo.gif)
 
-C'est une application web statique. Les noms restent dans le navigateur et rien n'est envoyé.
+C'est une application web statique. Les noms restent dans le navigateur et rien n'est envoyé. Après la première visite, elle s'ouvre sans réseau et le navigateur peut l'installer comme application.
 
 ## Avant et après
 
