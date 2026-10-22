@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="A private classroom seating planner that explains why requests cannot all be met and lets you try a verified fix before printing."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SeatReason" />
+    <meta
+      property="og:description"
+      content="Seating plans that explain themselves. Runs in your browser, names never leave it."
+    />
+    <meta property="og:image" content="./social-card.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>SeatReason: seating plans that explain themselves</title>
+    <script>
+      try {
+        var t = localStorage.getItem("seatreason.theme");
+        if (t === "light" || t === "dark")
+          document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

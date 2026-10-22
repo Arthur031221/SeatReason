@@ -1,0 +1,126 @@
+import type en from "./en.ts";
+
+const fr: Record<keyof typeof en, string> = {
+  "app.tagline": "Des plans de classe qui expliquent leurs raisons",
+  "app.privacy": "Les noms restent dans ce navigateur. Rien n'est envoyé.",
+  "app.source": "Code source",
+
+  "header.examples": "Classe d'exemple",
+  "header.exampleSqueeze": "Premier rang trop étroit",
+  "header.exampleCrowded": "Premier rang surchargé",
+  "header.exampleReady": "Ça marche du premier coup",
+  "header.undo": "Annuler",
+  "header.redo": "Rétablir",
+  "header.save": "Enregistrer le fichier",
+  "header.open": "Ouvrir un fichier",
+  "header.print": "Imprimer",
+  "header.language": "Langue",
+  "header.theme": "Thème",
+  "theme.auto": "Auto",
+  "theme.light": "Clair",
+  "theme.dark": "Sombre",
+  "header.openFailed": "Ce fichier n'est pas un plan SeatReason ({reason}).",
+
+  "status.working": "Vérification de vos demandes",
+  "status.cancel": "Annuler",
+  "status.cancelled": "La vérification a été annulée. Rien n'a été décidé.",
+  "status.retry": "Vérifier à nouveau",
+  "status.empty": "Ajoutez vos élèves pour commencer.",
+  "status.ok": "Le plan peut respecter toutes les demandes ({count} activées).",
+  "status.okNone":
+    "Pas encore de demande. N'importe quelle disposition convient.",
+  "status.capacity":
+    "Il n'y a pas assez de places. Élèves : {pupils}. Places : {seats}.",
+  "status.conflict":
+    "Ces {count} demandes ne peuvent pas être respectées ensemble",
+  "status.conflictMinimal":
+    "Retirez-en une seule et les autres deviennent compatibles. Les autres demandes de votre liste ne faisaient pas partie du problème.",
+  "status.conflictUnproven":
+    "La recherche s'est arrêtée avant de pouvoir vérifier si un groupe plus petit suffit. Certaines de ces demandes ne sont peut-être pas nécessaires.",
+  "status.inconclusive":
+    "La vérification s'est arrêtée après {seconds} secondes sans réponse. Cela ne veut pas dire que les demandes sont impossibles.",
+  "status.error": "Cette classe ne peut pas être vérifiée : {reason}",
+
+  "repair.title": "À quelle demande renonceriez-vous ?",
+  "repair.worksFresh": "Les autres sont compatibles.",
+  "repair.works": "Les autres sont compatibles. Places modifiées : {count}.",
+  "repair.worksSame": "Les autres sont compatibles sans changer le plan.",
+  "repair.stillBlocked": "Un autre conflit subsiste.",
+  "repair.unknown": "Impossible à trancher dans le temps imparti.",
+  "repair.preview": "Voir ce plan",
+  "repair.previewing": "Plan affiché sans : {request}",
+  "repair.use": "Utiliser ce plan et désactiver la demande",
+  "repair.back": "Revenir à mon plan",
+  "repair.changed": "Les places modifiées sont entourées.",
+  "repair.remaining": "Toujours en conflit : {requests}",
+
+  "class.title": "1. Votre classe",
+  "class.name": "Nom de la classe",
+  "class.roster": "Élèves, un nom par ligne",
+  "class.rosterHint":
+    "Collez une liste ou une colonne CSV. Les homonymes ne posent pas de problème.",
+  "class.update": "Mettre à jour la classe",
+  "class.count": "Élèves : {count}",
+  "class.truncated": "Seuls les {max} premiers noms ont été utilisés.",
+  "class.rows": "Rangées",
+  "class.cols": "Places par rangée",
+  "class.room": "Salle",
+  "class.editRoom": "Marquer les tables absentes",
+  "class.editRoomDone": "Terminer le marquage",
+  "class.editRoomHint":
+    "Cliquez sur une place pour la retirer de la salle ou la remettre.",
+
+  "rules.title": "2. Vos demandes",
+  "rules.empty":
+    "Pas encore de demande. Ajoutez-en une ci-dessous et la vérification se fait toute seule.",
+  "rules.kind": "Type de demande",
+  "rules.kindPin": "Place fixe",
+  "rules.kindFront": "Près du tableau",
+  "rules.kindApart": "Garder séparés",
+  "rules.pupil": "Élève",
+  "rules.other": "Autre élève",
+  "rules.row": "Rangée",
+  "rules.seat": "Place",
+  "rules.frontRows": "Nombre de rangées de devant autorisées",
+  "rules.add": "Ajouter la demande",
+  "rules.remove": "Retirer la demande",
+  "rules.enabled": "La demande est activée",
+  "rules.inConflict": "En conflit",
+  "rules.pin": "{name} s'assoit rangée {row}, place {col}",
+  "rules.front1": "{name} s'assoit au premier rang",
+  "rules.frontN": "{name} s'assoit dans les {rows} premiers rangs",
+  "rules.apart": "{a} et {b} ne sont pas assis côte à côte",
+  "rules.apartNote":
+    "Côte à côte veut dire à gauche, à droite, devant ou derrière.",
+  "rules.blockedSeat": "Cette place n'existe pas dans la salle.",
+  "rules.needPupils": "Ajoutez d'abord des élèves.",
+
+  "plan.title": "3. Le plan",
+  "plan.front": "Avant de la salle",
+  "plan.empty": "Place libre",
+  "plan.blocked": "Pas de table ici",
+  "plan.make": "Faire un plan",
+  "plan.shuffle": "Mélanger",
+  "plan.clear": "Effacer le plan",
+  "plan.unseated": "Pas encore placés",
+  "plan.unseat": "Retirer {name} du plan",
+  "plan.dragHint":
+    "Glissez un nom sur une place, ou cliquez sur un nom puis sur une place pour échanger.",
+  "plan.selected": "{name} est sélectionné. Choisissez une place.",
+  "plan.valid": "Ce plan respecte toutes les demandes.",
+  "plan.violations": "Ce plan ne respecte pas certaines demandes :",
+  "plan.seatLabel": "Rangée {row}, place {col}",
+  "plan.seatLabelFilled": "Rangée {row}, place {col} : {name}",
+  "plan.pinned": "Place fixe",
+
+  "print.title": "Plan de classe",
+  "print.requests": "Demandes",
+  "print.kept": "respectée",
+  "print.broken": "non respectée",
+  "print.off": "désactivée",
+  "print.list": "Élèves par nom",
+  "print.checked":
+    "Vérifié dans le navigateur avec un solveur. Aucun nom n'a quitté cet appareil.",
+};
+
+export default fr;

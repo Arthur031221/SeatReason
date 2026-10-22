@@ -1,0 +1,125 @@
+import type en from "./en.ts";
+
+const ptBR: Record<keyof typeof en, string> = {
+  "app.tagline": "Mapas de sala que explicam seus motivos",
+  "app.privacy": "Os nomes ficam neste navegador. Nada é enviado.",
+  "app.source": "Código-fonte",
+
+  "header.examples": "Turma de exemplo",
+  "header.exampleSqueeze": "Aperto na primeira fileira",
+  "header.exampleCrowded": "Primeira fileira lotada",
+  "header.exampleReady": "Funciona de primeira",
+  "header.undo": "Desfazer",
+  "header.redo": "Refazer",
+  "header.save": "Salvar arquivo",
+  "header.open": "Abrir arquivo",
+  "header.print": "Imprimir",
+  "header.language": "Idioma",
+  "header.theme": "Tema",
+  "theme.auto": "Automático",
+  "theme.light": "Claro",
+  "theme.dark": "Escuro",
+  "header.openFailed": "Esse arquivo não é um mapa do SeatReason ({reason}).",
+
+  "status.working": "Verificando seus pedidos",
+  "status.cancel": "Cancelar",
+  "status.cancelled": "A verificação foi cancelada. Nada foi decidido.",
+  "status.retry": "Verificar de novo",
+  "status.empty": "Adicione os alunos para começar.",
+  "status.ok": "O mapa pode atender a todos os pedidos ({count} ativados).",
+  "status.okNone": "Ainda não há pedidos. Qualquer arranjo serve.",
+  "status.capacity":
+    "Não há carteiras suficientes. Alunos: {pupils}. Carteiras: {seats}.",
+  "status.conflict":
+    "Estes {count} pedidos não podem ser atendidos ao mesmo tempo",
+  "status.conflictMinimal":
+    "Tire qualquer um deles e os outros passam a caber juntos. Os demais pedidos da sua lista não faziam parte do problema.",
+  "status.conflictUnproven":
+    "A busca parou antes de verificar se um grupo menor bastaria, então alguns destes pedidos podem não ser necessários.",
+  "status.inconclusive":
+    "A verificação parou depois de {seconds} segundos sem resposta. Isso não quer dizer que os pedidos sejam impossíveis.",
+  "status.error": "Não foi possível verificar a turma: {reason}",
+
+  "repair.title": "De qual pedido você abriria mão?",
+  "repair.worksFresh": "Os outros podem ser atendidos.",
+  "repair.works": "Os outros podem ser atendidos. Lugares que mudam: {count}.",
+  "repair.worksSame": "Os outros podem ser atendidos sem mudar o mapa.",
+  "repair.stillBlocked": "Ainda resta um conflito.",
+  "repair.unknown": "Não foi possível decidir a tempo.",
+  "repair.preview": "Ver este mapa",
+  "repair.previewing": "Mostrando o mapa sem: {request}",
+  "repair.use": "Usar este mapa e desativar o pedido",
+  "repair.back": "Voltar ao meu mapa",
+  "repair.changed": "Os lugares que mudaram estão contornados.",
+  "repair.remaining": "Ainda em conflito: {requests}",
+
+  "class.title": "1. Sua turma",
+  "class.name": "Nome da turma",
+  "class.roster": "Alunos, um nome por linha",
+  "class.rosterHint":
+    "Cole uma lista ou uma coluna de CSV. Nomes iguais não são problema.",
+  "class.update": "Atualizar turma",
+  "class.count": "Alunos: {count}",
+  "class.truncated": "Só os primeiros {max} nomes foram usados.",
+  "class.rows": "Fileiras",
+  "class.cols": "Lugares por fileira",
+  "class.room": "Sala",
+  "class.editRoom": "Marcar carteiras ausentes",
+  "class.editRoomDone": "Concluir marcação",
+  "class.editRoomHint":
+    "Clique num lugar para tirá-lo da sala ou colocá-lo de volta.",
+
+  "rules.title": "2. Seus pedidos",
+  "rules.empty":
+    "Ainda não há pedidos. Adicione um abaixo e a verificação acontece sozinha.",
+  "rules.kind": "Tipo de pedido",
+  "rules.kindPin": "Lugar fixo",
+  "rules.kindFront": "Perto da frente",
+  "rules.kindApart": "Manter separados",
+  "rules.pupil": "Aluno",
+  "rules.other": "Outro aluno",
+  "rules.row": "Fileira",
+  "rules.seat": "Lugar",
+  "rules.frontRows": "Quantas fileiras da frente são aceitas",
+  "rules.add": "Adicionar pedido",
+  "rules.remove": "Remover pedido",
+  "rules.enabled": "O pedido está ativado",
+  "rules.inConflict": "Em conflito",
+  "rules.pin": "{name} senta na fileira {row}, lugar {col}",
+  "rules.front1": "{name} senta na primeira fileira",
+  "rules.frontN": "{name} senta nas primeiras {rows} fileiras",
+  "rules.apart": "{a} e {b} não sentam lado a lado",
+  "rules.apartNote":
+    "Lado a lado quer dizer à esquerda, à direita, na frente ou atrás.",
+  "rules.blockedSeat": "Esse lugar não existe na sala.",
+  "rules.needPupils": "Adicione alunos primeiro.",
+
+  "plan.title": "3. O mapa",
+  "plan.front": "Frente da sala",
+  "plan.empty": "Lugar vazio",
+  "plan.blocked": "Sem carteira aqui",
+  "plan.make": "Montar um mapa",
+  "plan.shuffle": "Embaralhar",
+  "plan.clear": "Limpar o mapa",
+  "plan.unseated": "Ainda sem lugar",
+  "plan.unseat": "Tirar {name} do mapa",
+  "plan.dragHint":
+    "Arraste um nome até um lugar, ou clique num nome e depois num lugar para trocar.",
+  "plan.selected": "{name} selecionado. Escolha um lugar.",
+  "plan.valid": "Este mapa atende a todos os pedidos.",
+  "plan.violations": "Este mapa não atende a alguns pedidos:",
+  "plan.seatLabel": "Fileira {row}, lugar {col}",
+  "plan.seatLabelFilled": "Fileira {row}, lugar {col}: {name}",
+  "plan.pinned": "Lugar fixo",
+
+  "print.title": "Mapa de sala",
+  "print.requests": "Pedidos",
+  "print.kept": "atendido",
+  "print.broken": "não atendido",
+  "print.off": "desativado",
+  "print.list": "Alunos por nome",
+  "print.checked":
+    "Verificado no navegador com um solver. Nenhum nome saiu deste dispositivo.",
+};
+
+export default ptBR;
