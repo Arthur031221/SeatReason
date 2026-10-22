@@ -1,6 +1,7 @@
 import {
   MAX_PUPILS,
   MAX_SEATS,
+  rulePupils,
   seatCount,
   type Plan,
   type Pupil,
@@ -25,7 +26,8 @@ export interface Project {
 export type NewRule =
   | { kind: "pin"; pupil: string; seat: number }
   | { kind: "front"; pupil: string; rows: number }
-  | { kind: "apart"; a: string; b: string };
+  | { kind: "apart"; a: string; b: string }
+  | { kind: "together"; a: string; b: string };
 
 export type Action =
   | { type: "rename"; name: string }
@@ -144,7 +146,7 @@ function applyRoster(project: Project, names: string[]): Project {
     ...project,
     pupils,
     rules: project.rules.filter((r) =>
-      (r.kind === "apart" ? [r.a, r.b] : [r.pupil]).every((id) => keep.has(id)),
+      rulePupils(r).every((id) => keep.has(id)),
     ),
     plan: Object.fromEntries(
       Object.entries(project.plan).filter(([id]) => keep.has(id)),
@@ -305,6 +307,8 @@ function cleanRule(rule: Rule): Rule {
       return { ...base, kind: "front", pupil: rule.pupil, rows: rule.rows };
     case "apart":
       return { ...base, kind: "apart", a: rule.a, b: rule.b };
+    case "together":
+      return { ...base, kind: "together", a: rule.a, b: rule.b };
   }
 }
 
@@ -372,7 +376,7 @@ export function parseProject(value: unknown): Project {
         (r.rows as number) <= room.rows
       );
     }
-    if (r.kind === "apart") {
+    if (r.kind === "apart" || r.kind === "together") {
       return ids.has(r.a as string) && ids.has(r.b as string) && r.a !== r.b;
     }
     return false;

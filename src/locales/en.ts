@@ -40,6 +40,7 @@ const en = {
   "rules.kindPin": "Fixed seat",
   "rules.kindFront": "Near the front",
   "rules.kindApart": "Keep apart",
+  "rules.kindTogether": "Sit together",
   "rules.pupil": "Pupil",
   "rules.other": "Other pupil",
   "rules.row": "Row",
@@ -53,6 +54,7 @@ const en = {
   "rules.front1": "{name} sits in the front row",
   "rules.frontN": "{name} sits in the first {rows} rows",
   "rules.apart": "{a} and {b} do not sit next to each other",
+  "rules.together": "{a} and {b} sit next to each other",
   "rules.apartNote":
     "Next to each other means left, right, in front or behind.",
   "rules.blockedSeat": "That seat is not in the room.",

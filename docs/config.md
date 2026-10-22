@@ -48,5 +48,6 @@ Seats are numbered from zero, row by row, so seat `row * cols + col`. A rule is 
 - `{ "kind": "pin", "pupil": id, "seat": n }`
 - `{ "kind": "front", "pupil": id, "rows": n }`
 - `{ "kind": "apart", "a": id, "b": id }`
+- `{ "kind": "together", "a": id, "b": id }`
 
 Every rule also has `id` and `enabled`. A file that fails validation is refused as a whole.

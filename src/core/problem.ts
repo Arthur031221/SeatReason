@@ -40,7 +40,25 @@ export interface ApartRule extends RuleBase {
   b: string;
 }
 
-export type Rule = PinRule | FrontRule | ApartRule;
+export interface TogetherRule extends RuleBase {
+  kind: "together";
+  a: string;
+  b: string;
+}
+
+export type Rule = PinRule | FrontRule | ApartRule | TogetherRule;
+
+/** The pupils a rule is about. */
+export function rulePupils(rule: Rule): string[] {
+  return rule.kind === "apart" || rule.kind === "together"
+    ? [rule.a, rule.b]
+    : [rule.pupil];
+}
+
+/** Whether a rule is about two pupils and their neighbouring seats. */
+export function isPairRule(rule: Rule): rule is ApartRule | TogetherRule {
+  return rule.kind === "apart" || rule.kind === "together";
+}
 
 export interface Problem {
   room: Room;
@@ -110,7 +128,7 @@ export function validateShape(problem: Problem): string[] {
   const ruleIds = new Set(rules.map((r) => r.id));
   if (ruleIds.size !== rules.length) errors.push("rule ids must be unique");
   for (const rule of rules) {
-    const refs = rule.kind === "apart" ? [rule.a, rule.b] : [rule.pupil];
+    const refs = rulePupils(rule);
     if (refs.some((id) => !ids.has(id))) {
       errors.push(`rule ${rule.id} names an unknown pupil`);
     }
@@ -120,8 +138,8 @@ export function validateShape(problem: Problem): string[] {
     ) {
       errors.push(`rule ${rule.id} pins a seat outside the room`);
     }
-    if (rule.kind === "apart" && rule.a === rule.b) {
-      errors.push(`rule ${rule.id} keeps a pupil apart from themselves`);
+    if (isPairRule(rule) && rule.a === rule.b) {
+      errors.push(`rule ${rule.id} pairs a pupil with themselves`);
     }
   }
   return errors;

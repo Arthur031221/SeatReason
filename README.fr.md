@@ -28,7 +28,7 @@ L'exemple "Premier rang trop étroit" : 24 élèves, une salle de 5 sur 6 avec d
 ## Comment un plan est fait
 
 1. **Décrire la classe.** Collez des noms ou une colonne CSV, jusqu'à 40 élèves. Les noms identiques sont distingués par des ids internes. Réglez le nombre de rangs et de places par rang, puis marquez les tables absentes. La salle compte au plus 48 places.
-2. **Ajouter des demandes.** Il y en a trois sortes : une place fixe, une place dans les N premiers rangs, et deux élèves qui ne doivent pas être voisins (à gauche, à droite, devant ou derrière). Chacune peut être désactivée sans être supprimée.
+2. **Ajouter des demandes.** Il y en a quatre sortes : une place fixe, une place dans les N premiers rangs, deux élèves qui ne doivent pas être voisins et deux élèves qui doivent l'être (à gauche, à droite, devant ou derrière). Chacune peut être désactivée sans être supprimée.
 3. **Lire le verdict.** Peu après chaque changement, la vérification se lance seule dans un worker, avec un bouton d'annulation. Elle se termine par résolu, impossible ou non concluant. Impossible vient avec un ensemble minimal de demandes : désactivez n'importe laquelle et le reste tient. SeatReason ne le dit qu'après avoir testé chaque demande de l'ensemble.
 4. **Essayer une réparation.** Chaque demande du conflit dont le retrait permet au reste de tenir a un bouton "Voir ce plan". L'aperçu replanifie sans cette demande et garde les places actuelles quand il le peut. Les places modifiées sont entourées. Le plan n'est remplacé que si vous appuyez sur le bouton qui le dit.
 5. **Ajuster et garder.** Faites glisser des élèves ou cliquez sur deux places pour les échanger, et fixez un élève à sa place actuelle d'un seul bouton. Un déplacement qui brise une demande s'affiche avec sa raison et peut être annulé. La classe est enregistrée dans le navigateur, exportée dans un fichier `.seatreason.json` et imprimée comme plan avec un résumé des demandes.
@@ -126,9 +126,9 @@ Les tests comparent le solveur à une recherche exhaustive sur de petites salles
 ## Limites
 
 - Un grand nombre de paires à séparer entre elles dans une salle étroite peut être trop difficile pour la limite de 8 secondes. La page affiche alors "non concluant" et ne prétend pas que les règles sont impossibles. Neuf élèves à séparer tous les uns des autres dans une salle de 4 sur 4 en sont un exemple.
-- Séparer veut dire voisins orthogonaux. Les places en diagonale sont permises.
+- Séparer veut dire voisins orthogonaux. Les places en diagonale sont permises. Placer ensemble demande le même genre de voisin, une place en diagonale ne compte donc pas.
 - L'aperçu de réparation essaie une demande à la fois. Il ne cherche pas la réparation qui change le moins de places.
-- Il n'existe que trois sortes de demandes. Il n'y a ni équilibre filles-garçons, ni placement en groupes, ni rotation.
+- Il n'existe que quatre sortes de demandes. Il n'y a ni équilibre filles-garçons, ni placement en groupes, ni rotation.
 
 ## Principes de conception
 

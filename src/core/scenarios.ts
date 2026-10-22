@@ -92,6 +92,7 @@ export const SCENARIOS: Record<ScenarioKey, () => Project> = {
       rule({ kind: "pin", pupil: id("Omar"), seat: 0 }),
       rule({ kind: "apart", a: id("Hana"), b: id("Lucas") }),
       rule({ kind: "apart", a: id("Mei"), b: id("Jonas") }),
+      rule({ kind: "together", a: id("Kofi"), b: id("Elena") }),
     ];
     return project;
   },

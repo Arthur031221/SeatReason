@@ -170,7 +170,7 @@ test("a request can be added and shows up in the conflict", async ({
     .locator("select[aria-label='Example class']")
     .selectOption("ready");
   await expect(
-    page.getByText("The plan can meet every request (4 switched on)."),
+    page.getByText("The plan can meet every request (5 switched on)."),
   ).toBeVisible();
   const form = page.locator(".rule-form");
   await form.getByLabel("Kind of request").selectOption("pin");
@@ -205,6 +205,27 @@ async function openClique(page: Page, path: string) {
   writeFileSync(path, serializeProject(project));
   await page.getByTestId("open-file").setInputFiles(path);
 }
+
+test("a pair asked to sit together and apart is named as a clash", async ({
+  page,
+}) => {
+  await page
+    .locator("select[aria-label='Example class']")
+    .selectOption("ready");
+  const form = page.locator(".rule-form");
+  await form.getByLabel("Kind of request").selectOption("together");
+  await form.locator("select").nth(1).selectOption({ label: "Hana" });
+  await form.locator("select").nth(2).selectOption({ label: "Lucas" });
+  await form.getByRole("button", { name: "Add request" }).click();
+  await expect(
+    page.getByText("These 2 requests cannot all hold"),
+  ).toBeVisible();
+  const clash = page.locator(".status");
+  await expect(clash).toContainText("Hana and Lucas sit next to each other");
+  await expect(clash).toContainText(
+    "Hana and Lucas do not sit next to each other",
+  );
+});
 
 test("a search that is cancelled is not reported as impossible", async ({
   page,

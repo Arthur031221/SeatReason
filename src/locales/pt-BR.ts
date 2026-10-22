@@ -76,6 +76,7 @@ const ptBR: Record<keyof typeof en, string> = {
   "rules.kindPin": "Lugar fixo",
   "rules.kindFront": "Perto da frente",
   "rules.kindApart": "Manter separados",
+  "rules.kindTogether": "Sentar juntos",
   "rules.pupil": "Aluno",
   "rules.other": "Outro aluno",
   "rules.row": "Fileira",
@@ -89,6 +90,7 @@ const ptBR: Record<keyof typeof en, string> = {
   "rules.front1": "{name} senta na primeira fileira",
   "rules.frontN": "{name} senta nas primeiras {rows} fileiras",
   "rules.apart": "{a} e {b} não sentam lado a lado",
+  "rules.together": "{a} e {b} sentam lado a lado",
   "rules.apartNote":
     "Lado a lado quer dizer à esquerda, à direita, na frente ou atrás.",
   "rules.blockedSeat": "Esse lugar não existe na sala.",

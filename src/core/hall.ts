@@ -56,13 +56,15 @@ function violator(domain: Map<string, Set<number>>): string[] | null {
 function seatRules(problem: Problem, ids?: Set<string>): SeatRule[] {
   return problem.rules.filter(
     (r): r is SeatRule =>
-      r.enabled && r.kind !== "apart" && (!ids || ids.has(r.id)),
+      r.enabled &&
+      (r.kind === "pin" || r.kind === "front") &&
+      (!ids || ids.has(r.id)),
   );
 }
 
 /**
  * Looks for a set of enabled pin and front rules that cannot hold together,
- * ignoring keep-apart rules. Returns a subset-minimal such set, or null when
+ * ignoring the pair rules. Returns a subset-minimal such set, or null when
  * the seat rules alone are satisfiable.
  */
 export function seatRuleConflict(problem: Problem): string[] | null {

@@ -28,7 +28,7 @@ The "Front row squeeze" example: 24 pupils, a 5 by 6 room with two missing desks
 ## How a plan is made
 
 1. **Describe the class.** Paste names or one CSV column, up to 40 pupils. Equal names are kept apart by internal ids. Set the rows and seats per row, then mark missing desks. The room has at most 48 seat positions.
-2. **Add requests.** There are three kinds: a fixed seat, a place in the first N rows, and two pupils who must not sit next to each other (left, right, in front or behind). You can switch any of them off without deleting it.
+2. **Add requests.** There are four kinds: a fixed seat, a place in the first N rows, two pupils who must not sit next to each other, and two pupils who must (left, right, in front or behind). You can switch any of them off without deleting it.
 3. **Read the verdict.** The check runs by itself a moment after every change, in a worker, with a cancel button. It ends as solved, impossible or inconclusive. An impossible verdict comes with a minimal set of requests: switch off any one of them and the rest work. SeatReason only says so after testing every request in the set.
 4. **Try a repair.** Each request in the clash whose removal lets the rest hold has a "Show this plan" button. The preview plans afresh without that request and keeps the current seats where it can. Changed seats are outlined. The plan is replaced only when you press the button that says so.
 5. **Adjust and keep.** Drag pupils or click two seats to swap, and fix a pupil in the current seat with one button. A move that breaks a request is shown with the reason and can be undone. The class is saved in the browser, exported to a `.seatreason.json` file and printed as a chart with a request summary.
@@ -126,9 +126,9 @@ The tests compare the solver with an exhaustive search on small rooms. They also
 ## Limits
 
 - A request set of many mutual keep-apart pairs in a tight room can be too hard for the 8 second limit. The page then says "inconclusive" and doesn't claim the rules are impossible. Nine pupils who must all be kept apart in a 4 by 4 room is one such case.
-- Keep apart means orthogonal neighbours. Diagonal seats are allowed.
+- Keep apart means orthogonal neighbours. Diagonal seats are allowed. Sit together needs the same kind of neighbour, so a diagonal seat does not count.
 - The repair preview tries one request at a time. It doesn't search for the repair that changes the fewest seats.
-- Only three kinds of request exist. There's no gender balance, no group seating and no rotation.
+- Only four kinds of request exist. There's no gender balance, no group seating and no rotation. Sitting together means next to each other, not in the same group.
 
 ## Design principles
 

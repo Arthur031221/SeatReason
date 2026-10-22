@@ -77,6 +77,7 @@ const fr: Record<keyof typeof en, string> = {
   "rules.kindPin": "Place fixe",
   "rules.kindFront": "Près du tableau",
   "rules.kindApart": "Garder séparés",
+  "rules.kindTogether": "Placer ensemble",
   "rules.pupil": "Élève",
   "rules.other": "Autre élève",
   "rules.row": "Rangée",
@@ -90,6 +91,7 @@ const fr: Record<keyof typeof en, string> = {
   "rules.front1": "{name} s'assoit au premier rang",
   "rules.frontN": "{name} s'assoit dans les {rows} premiers rangs",
   "rules.apart": "{a} et {b} ne sont pas assis côte à côte",
+  "rules.together": "{a} et {b} sont assis côte à côte",
   "rules.apartNote":
     "Côte à côte veut dire à gauche, à droite, devant ou derrière.",
   "rules.blockedSeat": "Cette place n'existe pas dans la salle.",

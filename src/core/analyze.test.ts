@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { plan, repairOptions, InvalidProblemError } from "./analyze.ts";
 import { bruteForce } from "./oracle.ts";
-import type { Problem, Rule } from "./problem.ts";
+import { isPairRule, type Problem, type Rule } from "./problem.ts";
 import { validatePlan } from "./validate.ts";
 
 function rng(seed: number) {
@@ -39,15 +39,20 @@ function randomProblem(random: () => number): Problem {
           seat: Math.floor(random() * total),
         };
       }
-      if (roll < 0.6) {
+      if (roll < 0.5) {
         return { ...base, kind: "front", pupil: pick(), rows: 1 };
       }
       const a = pick();
       let b = pick();
       while (b === a && n > 1) b = pick();
-      return { ...base, kind: "apart", a, b: n > 1 ? b : a };
+      return {
+        ...base,
+        kind: roll < 0.8 ? "apart" : "together",
+        a,
+        b: n > 1 ? b : a,
+      };
     },
-  ).filter((r) => r.kind !== "apart" || r.a !== r.b);
+  ).filter((r) => !isPairRule(r) || r.a !== r.b);
   return { room: { rows, cols, blocked }, pupils, rules };
 }
 
@@ -82,6 +87,53 @@ describe("plan", () => {
     }
     expect(solved).toBeGreaterThan(30);
     expect(conflicts).toBeGreaterThan(30);
+  });
+
+  it("names a pair that must sit together and also apart", () => {
+    const problem: Problem = {
+      room: { rows: 2, cols: 3, blocked: [] },
+      pupils: ["a", "b", "c"].map((id) => ({ id, name: id })),
+      rules: [
+        { id: "t", kind: "together", a: "a", b: "b", enabled: true },
+        { id: "x", kind: "apart", a: "b", b: "a", enabled: true },
+        { id: "f", kind: "front", pupil: "c", rows: 1, enabled: true },
+      ],
+    };
+    expect(plan(problem)).toMatchObject({
+      status: "conflict",
+      minimal: true,
+      rules: ["t", "x"],
+    });
+  });
+
+  it("seats a pupil next to a pinned corner and finds no seat for a lone desk", () => {
+    const together = (id: string): Rule => ({
+      id,
+      kind: "together",
+      a: "a",
+      b: "b",
+      enabled: true,
+    });
+    const pinned: Problem = {
+      room: { rows: 2, cols: 2, blocked: [] },
+      pupils: ["a", "b"].map((id) => ({ id, name: id })),
+      rules: [
+        { id: "p", kind: "pin", pupil: "a", seat: 0, enabled: true },
+        together("t"),
+      ],
+    };
+    const solved = plan(pinned);
+    expect(solved.status).toBe("solved");
+    if (solved.status === "solved") {
+      expect([1, 2]).toContain(solved.plan.b);
+    }
+    // Seats 0 and 3 touch only blocked or diagonal seats, so a lone pair cannot meet.
+    const apartRoom: Problem = {
+      room: { rows: 2, cols: 2, blocked: [1, 2] },
+      pupils: pinned.pupils,
+      rules: [together("t")],
+    };
+    expect(plan(apartRoom)).toMatchObject({ status: "conflict", rules: ["t"] });
   });
 
   it("reports a capacity failure before any rule is looked at", () => {

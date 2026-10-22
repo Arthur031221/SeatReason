@@ -1,5 +1,6 @@
 import {
   adjacentPairs,
+  rulePupils,
   usableSeats,
   type Plan,
   type Problem,
@@ -22,9 +23,7 @@ export class Encoding {
     const { room, pupils, rules } = problem;
     const seats = usableSeats(room);
     // Pupils that no rule mentions need no variables: they take leftover seats.
-    const named = new Set(
-      rules.flatMap((r) => (r.kind === "apart" ? [r.a, r.b] : [r.pupil])),
-    );
+    const named = new Set(rules.flatMap(rulePupils));
     const constrained = pupils.filter((p) => named.has(p.id));
     for (const pupil of constrained) {
       const row = new Map<number, number>();
@@ -55,6 +54,19 @@ export class Encoding {
           if (Math.floor(seat / room.cols) >= rule.rows) {
             this.solver.addClause([-sel, -this.var(rule.pupil, seat)!]);
           }
+        }
+      } else if (rule.kind === "together") {
+        // Wherever a sits, b sits in one of the seats next to it.
+        const next = new Map<number, number[]>();
+        for (const [s, t] of pairs) {
+          next.set(s, [...(next.get(s) ?? []), t]);
+          next.set(t, [...(next.get(t) ?? []), s]);
+        }
+        for (const seat of seats) {
+          const beside = (next.get(seat) ?? []).map((n) =>
+            this.var(rule.b, n)!,
+          );
+          this.solver.addClause([-sel, -this.var(rule.a, seat)!, ...beside]);
         }
       } else {
         for (const [s, t] of pairs) {

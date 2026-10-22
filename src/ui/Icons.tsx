@@ -11,6 +11,7 @@ const paths = {
   cross: "m6 6 12 12M18 6 6 18",
   front: "M4 5h16M7 10h10M7 15h10M7 20h10",
   apart: "M5 9h4v6H5zM15 9h4v6h-4zM11 12h2",
+  together: "M4 9h8v6H4zM12 9h8v6h-8z",
   pin: "M12 3v9m-4 0h8m-4 0v9",
   desk: "M5 8h14v4H5zM8 12v7m8-7v7",
   sun: "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5",

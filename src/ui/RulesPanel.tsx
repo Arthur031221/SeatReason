@@ -16,6 +16,7 @@ const ICONS: Record<string, IconName> = {
   pin: "pin",
   front: "front",
   apart: "apart",
+  together: "together",
 };
 
 export function RulesPanel({ project, inConflict, dispatch }: Props) {
@@ -131,6 +132,7 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
           >
             <option value="front">{t("rules.kindFront")}</option>
             <option value="apart">{t("rules.kindApart")}</option>
+            <option value="together">{t("rules.kindTogether")}</option>
             <option value="pin">{t("rules.kindPin")}</option>
           </select>
         </label>
@@ -140,7 +142,7 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
             {options}
           </select>
         </label>
-        {kind === "apart" ? (
+        {kind === "apart" || kind === "together" ? (
           <label className="field">
             <span>{t("rules.other")}</span>
             <select value={second} onChange={(e) => setOther(e.target.value)}>
@@ -199,7 +201,9 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
             {error}
           </p>
         ) : null}
-        {kind === "apart" ? <small>{t("rules.apartNote")}</small> : null}
+        {kind === "apart" || kind === "together" ? (
+          <small>{t("rules.apartNote")}</small>
+        ) : null}
       </form>
     </section>
   );

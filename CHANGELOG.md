@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- New request "Sit together": two pupils who must sit next to each other, with the same minimal conflict and repair previews as the other kinds
+- A pair asked to sit together and apart is named as a clash of exactly those two requests
+- The "Class 3C" example includes a sit-together request
+- Project files from 0.2.0 open unchanged
+
 ## 0.2.0
 
 - Room size boxes apply on Enter or blur, so clearing a box to type a new number no longer shrinks the room and drops fixed seats on the way

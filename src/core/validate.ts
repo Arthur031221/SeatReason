@@ -14,7 +14,7 @@ export type Violation =
 
 /**
  * Whether a plan satisfies one rule. A fixed-seat or front-row rule about an
- * unseated pupil is not satisfied. A keep-apart rule is, since that pupil has
+ * unseated pupil is not satisfied, nor is a sit-together rule. A keep-apart rule is, since that pupil has
  * no seat to be near.
  */
 export function ruleHolds(problem: Problem, plan: Plan, rule: Rule): boolean {
@@ -30,6 +30,11 @@ export function ruleHolds(problem: Problem, plan: Plan, rule: Rule): boolean {
       const a = plan[rule.a];
       const b = plan[rule.b];
       return a === undefined || b === undefined || !areAdjacent(room, a, b);
+    }
+    case "together": {
+      const a = plan[rule.a];
+      const b = plan[rule.b];
+      return a !== undefined && b !== undefined && areAdjacent(room, a, b);
     }
   }
 }

@@ -45,11 +45,15 @@ describe("reduce", () => {
       type: "addRule",
       rule: { kind: "front", pupil: "p1", rows: 1 },
     });
+    p = reduce(p, {
+      type: "addRule",
+      rule: { kind: "together", a: "p1", b: "p2" },
+    });
     p = reduce(p, { type: "setRoster", names: ["Zed", "Ana", "Sam", "Sam"] });
     expect(p.pupils.find((x) => x.name === "Ana")!.id).toBe("p1");
-    expect(p.rules).toHaveLength(2);
+    expect(p.rules).toHaveLength(3);
     p = reduce(p, { type: "setRoster", names: ["Ana", "Sam"] });
-    expect(p.rules.map((r) => r.kind)).toEqual(["front"]);
+    expect(p.rules.map((r) => r.kind)).toEqual(["front", "together"]);
   });
 
   it("keeps the pupil, the seat and the rules when a typo in a name is fixed", () => {
@@ -152,6 +156,19 @@ describe("project files", () => {
     expect(parseProject(JSON.parse(serializeProject(project)))).toEqual(
       project,
     );
+  });
+  it("round-trips a sit-together request and refuses one that pairs a pupil with themselves", () => {
+    const project = SCENARIOS.ready();
+    expect(project.rules.some((r) => r.kind === "together")).toBe(true);
+    expect(parseProject(JSON.parse(serializeProject(project)))).toEqual(
+      project,
+    );
+    const bad = JSON.parse(serializeProject(project));
+    const together = bad.rules.find(
+      (r: { kind: string }) => r.kind === "together",
+    );
+    together.b = together.a;
+    expect(() => parseProject(bad)).toThrow("bad rules");
   });
   it("rejects files that point outside the class", () => {
     const project = JSON.parse(serializeProject(SCENARIOS.squeeze()));

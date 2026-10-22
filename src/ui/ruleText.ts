@@ -1,5 +1,6 @@
 import type { MessageKey } from "../i18n.tsx";
 import type { Room, Rule } from "../core/problem.ts";
+import { rulePupils } from "../core/problem.ts";
 import { seatPosition } from "../core/labels.ts";
 
 type T = (key: MessageKey, params?: Record<string, string | number>) => string;
@@ -23,9 +24,9 @@ export function describeRule(
         : t("rules.frontN", { name: name(rule.pupil), rows: rule.rows });
     case "apart":
       return t("rules.apart", { a: name(rule.a), b: name(rule.b) });
+    case "together":
+      return t("rules.together", { a: name(rule.a), b: name(rule.b) });
   }
 }
 
-export function rulePupils(rule: Rule): string[] {
-  return rule.kind === "apart" ? [rule.a, rule.b] : [rule.pupil];
-}
+export { rulePupils };
