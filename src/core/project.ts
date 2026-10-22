@@ -33,6 +33,7 @@ export type Action =
   | { type: "toggleBlocked"; seat: number }
   | { type: "setRoster"; names: string[] }
   | { type: "addRule"; rule: NewRule }
+  | { type: "pinHere"; pupil: string; seat: number }
   | { type: "removeRule"; id: string }
   | { type: "toggleRule"; id: string }
   | { type: "setPlan"; plan: Plan }
@@ -88,19 +89,56 @@ export function parseRoster(text: string): {
   };
 }
 
-/** Reuses the id of an existing pupil with the same name, so edits keep their rules. */
+/** Edit distance, used to tell a corrected typo from a different pupil. */
+function distance(a: string, b: string): number {
+  let row = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const next = [i];
+    for (let j = 1; j <= b.length; j++) {
+      next[j] = Math.min(
+        row[j]! + 1,
+        next[j - 1]! + 1,
+        row[j - 1]! + (a[i - 1] === b[j - 1] ? 0 : 1),
+      );
+    }
+    row = next;
+  }
+  return row[b.length]!;
+}
+
+/**
+ * Reuses the id of an existing pupil with the same name, so edits keep their
+ * rules. A name that is one or two letters away from the old name on the same
+ * line counts as a corrected typo and keeps the pupil too.
+ */
 function applyRoster(project: Project, names: string[]): Project {
   const pool = new Map<string, Pupil[]>();
   for (const pupil of project.pupils) {
     pool.set(pupil.name, [...(pool.get(pupil.name) ?? []), pupil]);
   }
-  const pupils: Pupil[] = [];
-  for (const name of names) {
-    const reused = pool.get(name)?.shift();
-    pupils.push(
-      reused ?? { id: nextId("p", [...project.pupils, ...pupils]), name },
+  const reused: (Pupil | undefined)[] = names.map((name) =>
+    pool.get(name)?.shift(),
+  );
+  const taken = new Set(reused.filter((p): p is Pupil => Boolean(p)));
+  const left = (p: Pupil) => !taken.has(p) && !reused.includes(p);
+  names.forEach((name, i) => {
+    const old = project.pupils[i];
+    if (reused[i] || !old || !left(old)) return;
+    const reach = Math.min(
+      2,
+      Math.floor(Math.min(name.length, old.name.length) / 3),
     );
-  }
+    if (reach > 0 && distance(name, old.name) <= reach) reused[i] = old;
+  });
+  const pupils: Pupil[] = [];
+  names.forEach((name, i) => {
+    const match = reused[i];
+    pupils.push(
+      match
+        ? { ...match, name }
+        : { id: nextId("p", [...project.pupils, ...pupils]), name },
+    );
+  });
   const keep = new Set(pupils.map((p) => p.id));
   return {
     ...project,
@@ -201,6 +239,23 @@ export function reduce(project: Project, action: Action): Project {
             id: nextId("r", project.rules),
             enabled: true,
           } as Rule,
+        ],
+      };
+    case "pinHere":
+      // One fixed seat per pupil: an earlier pin is replaced, not contradicted.
+      return {
+        ...project,
+        rules: [
+          ...project.rules.filter(
+            (r) => !(r.kind === "pin" && r.pupil === action.pupil),
+          ),
+          {
+            kind: "pin",
+            pupil: action.pupil,
+            seat: action.seat,
+            id: nextId("r", project.rules),
+            enabled: true,
+          },
         ],
       };
     case "removeRule":

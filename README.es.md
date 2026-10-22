@@ -31,7 +31,7 @@ El ejemplo "Apretados en la primera fila": 24 alumnos, un aula de 5 por 6 con do
 2. **Añade peticiones.** Hay tres tipos: un asiento fijo, un sitio en las primeras N filas y dos alumnos que no deben sentarse juntos (a izquierda, derecha, delante o detrás). Cada una se puede desactivar sin borrarla.
 3. **Lee el veredicto.** Poco después de cada cambio, la comprobación se ejecuta sola en un worker, con un botón para cancelar. Termina como resuelto, imposible o no concluyente. Imposible viene con un conjunto mínimo de peticiones: si desactivas cualquiera de ellas, el resto se puede cumplir. SeatReason solo lo afirma después de probar cada petición del conjunto.
 4. **Prueba una reparación.** Cada petición del conflicto cuya retirada deja que el resto se cumpla tiene un botón "Ver este plan". La vista previa planifica de nuevo sin esa petición y conserva los asientos actuales donde puede. Los asientos cambiados llevan un borde. El plan solo se reemplaza cuando pulsas el botón que lo dice.
-5. **Ajusta y guarda.** Arrastra alumnos o pulsa dos asientos para intercambiarlos. Un movimiento que rompe una petición se muestra con el motivo y se puede deshacer. La clase se guarda en el navegador, se exporta a un archivo `.seatreason.json` y se imprime como plano con un resumen de peticiones.
+5. **Ajusta y guarda.** Arrastra alumnos o pulsa dos asientos para intercambiarlos, y fija a un alumno en su asiento actual con un botón. Un movimiento que rompe una petición se muestra con el motivo y se puede deshacer. La clase se guarda en el navegador, se exporta a un archivo `.seatreason.json` y se imprime como plano con un resumen de peticiones.
 
 ## Archivos
 
@@ -89,7 +89,7 @@ Ejecuta `npm ci && npm run build` y sube la carpeta `dist/`. Todas las rutas son
 
 ## Uso
 
-Abre la página y elige "Apretados en la primera fila" en Clase de ejemplo. Aparece la lista del conflicto, con una reparación bajo cada petición.
+La página se abre con el ejemplo "Apretados en la primera fila", así que la lista del conflicto ya está ahí, con una reparación bajo cada petición. Los demás ejemplos están en Clase de ejemplo.
 
 Para usar tu propia clase:
 

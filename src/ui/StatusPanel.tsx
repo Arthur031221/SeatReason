@@ -130,8 +130,8 @@ export function StatusPanel(props: Props) {
   }
 
   return (
-    <div className="status is-bad conflict" role="status">
-      <div className="status-head">
+    <div className="status is-bad conflict">
+      <div className="status-head" role="status">
         <Icon name="cross" />
         <h3>{t("status.conflict", { count: outcome.rules.length })}</h3>
       </div>

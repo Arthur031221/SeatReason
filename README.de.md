@@ -31,7 +31,7 @@ Das Beispiel "Enge erste Reihe": 24 Schüler, ein Raum mit 5 mal 6 Plätzen und 
 2. **Wünsche hinzufügen.** Es gibt drei Arten: einen festen Platz, einen Platz in den ersten N Reihen und zwei Schüler, die nicht nebeneinander sitzen sollen (links, rechts, davor oder dahinter). Jeder Wunsch lässt sich ausschalten, ohne ihn zu löschen.
 3. **Ergebnis lesen.** Kurz nach jeder Änderung läuft die Prüfung von selbst in einem Worker, mit Abbrechen-Knopf. Sie endet als gelöst, unmöglich oder offen. Unmöglich kommt mit einer minimalen Menge von Wünschen: Schalten Sie einen beliebigen davon aus, und der Rest geht. SeatReason sagt das erst, nachdem jeder Wunsch der Menge getestet wurde.
 4. **Eine Reparatur probieren.** Jeder Wunsch im Konflikt, nach dessen Entfernung der Rest gilt, hat einen Knopf "Diesen Plan ansehen". Die Vorschau plant ohne diesen Wunsch neu und behält die aktuellen Plätze, wo es geht. Geänderte Plätze sind umrandet. Der Plan wird nur ersetzt, wenn Sie den Knopf drücken, der das sagt.
-5. **Anpassen und behalten.** Ziehen Sie Schüler oder klicken Sie zwei Plätze zum Tauschen an. Eine Verschiebung, die einen Wunsch verletzt, wird mit Begründung angezeigt und lässt sich rückgängig machen. Die Klasse wird im Browser gespeichert, in eine `.seatreason.json`-Datei exportiert und als Plan mit Wunschübersicht gedruckt.
+5. **Anpassen und behalten.** Ziehen Sie Schüler oder klicken Sie zwei Plätze zum Tauschen an und legen Sie einen Schüler mit einem Knopf auf seinen aktuellen Platz fest. Eine Verschiebung, die einen Wunsch verletzt, wird mit Begründung angezeigt und lässt sich rückgängig machen. Die Klasse wird im Browser gespeichert, in eine `.seatreason.json`-Datei exportiert und als Plan mit Wunschübersicht gedruckt.
 
 ## Dateien
 
@@ -89,7 +89,7 @@ Führen Sie `npm ci && npm run build` aus und laden Sie den Ordner `dist/` hoch.
 
 ## Nutzung
 
-Öffnen Sie die Seite und wählen Sie unter Beispielklasse "Enge erste Reihe". Die Konfliktliste erscheint, mit einer Reparatur unter jedem Wunsch.
+Die Seite öffnet sich mit dem Beispiel "Enge erste Reihe", die Konfliktliste ist also schon da, mit einer Reparatur unter jedem Wunsch. Weitere Beispiele stehen unter Beispielklasse.
 
 So nutzen Sie Ihre eigene Klasse:
 

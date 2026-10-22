@@ -54,7 +54,7 @@ const fr: Record<keyof typeof en, string> = {
   "repair.changed": "Les places modifiées sont entourées.",
   "repair.remaining": "Toujours en conflit : {requests}",
 
-  "class.title": "1. Votre classe",
+  "class.title": "Votre classe",
   "class.name": "Nom de la classe",
   "class.roster": "Élèves, un nom par ligne",
   "class.rosterHint":
@@ -70,7 +70,7 @@ const fr: Record<keyof typeof en, string> = {
   "class.editRoomHint":
     "Cliquez sur une place pour la retirer de la salle ou la remettre.",
 
-  "rules.title": "2. Vos demandes",
+  "rules.title": "Vos demandes",
   "rules.empty":
     "Pas encore de demande. Ajoutez-en une ci-dessous et la vérification se fait toute seule.",
   "rules.kind": "Type de demande",
@@ -95,7 +95,7 @@ const fr: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "Cette place n'existe pas dans la salle.",
   "rules.needPupils": "Ajoutez d'abord des élèves.",
 
-  "plan.title": "3. Le plan",
+  "plan.title": "Le plan",
   "plan.front": "Avant de la salle",
   "plan.empty": "Place libre",
   "plan.blocked": "Pas de table ici",
@@ -104,6 +104,10 @@ const fr: Record<keyof typeof en, string> = {
   "plan.clear": "Effacer le plan",
   "plan.unseated": "Pas encore placés",
   "plan.unseat": "Retirer {name} du plan",
+  "plan.pin": "Fixer {name} à cette place",
+  "plan.stateFocus": "dans un conflit",
+  "plan.stateChanged": "change de place dans ce plan",
+  "plan.stateBroken": "ne respecte pas une demande",
   "plan.dragHint":
     "Glissez un nom sur une place, ou cliquez sur un nom puis sur une place pour échanger.",
   "plan.selected": "{name} est sélectionné. Choisissez une place.",

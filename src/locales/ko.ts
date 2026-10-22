@@ -53,7 +53,7 @@ const ko: Record<keyof typeof en, string> = {
   "repair.changed": "바뀐 자리는 테두리로 표시됩니다.",
   "repair.remaining": "여전히 충돌: {requests}",
 
-  "class.title": "1. 학급",
+  "class.title": "학급",
   "class.name": "학급 이름",
   "class.roster": "학생 이름 (한 줄에 한 명)",
   "class.rosterHint":
@@ -69,7 +69,7 @@ const ko: Record<keyof typeof en, string> = {
   "class.editRoomHint":
     "자리를 클릭하면 교실에서 빼거나 다시 넣을 수 있습니다.",
 
-  "rules.title": "2. 요청",
+  "rules.title": "요청",
   "rules.empty":
     "아직 요청이 없습니다. 아래에서 추가하면 확인이 자동으로 실행됩니다.",
   "rules.kind": "요청 종류",
@@ -93,7 +93,7 @@ const ko: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "그 자리는 교실에 없습니다.",
   "rules.needPupils": "먼저 학생을 추가하세요.",
 
-  "plan.title": "3. 좌석 배치",
+  "plan.title": "좌석 배치",
   "plan.front": "교실 앞",
   "plan.empty": "빈 자리",
   "plan.blocked": "책상 없음",
@@ -102,6 +102,10 @@ const ko: Record<keyof typeof en, string> = {
   "plan.clear": "배치 지우기",
   "plan.unseated": "아직 앉지 않은 학생",
   "plan.unseat": "{name}을(를) 배치에서 빼기",
+  "plan.pin": "{name}을(를) 이 자리에 고정",
+  "plan.stateFocus": "충돌하는 요청에 포함됨",
+  "plan.stateChanged": "이 배치에서 자리가 바뀜",
+  "plan.stateBroken": "요청을 만족하지 못함",
   "plan.dragHint":
     "이름을 자리로 끌어다 놓거나, 이름과 자리를 차례로 클릭해 맞바꾸세요.",
   "plan.selected": "{name} 선택됨. 자리를 고르세요.",

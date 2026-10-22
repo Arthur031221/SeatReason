@@ -155,7 +155,9 @@ test("more pupils than desks is reported as a capacity problem", async ({
   page,
 }) => {
   await page.getByLabel("Seats per row").fill("2");
+  await page.getByLabel("Seats per row").press("Enter");
   await page.getByLabel("Rows", { exact: true }).fill("2");
+  await page.getByLabel("Rows", { exact: true }).press("Enter");
   await expect(
     page.getByText(/There are not enough desks. Pupils: 24. Desks: 4./),
   ).toBeVisible();
@@ -234,7 +236,7 @@ test("the language can be switched and is remembered", async ({ page }) => {
   await page.locator("select[aria-label='Language']").selectOption("ja");
   await expect(page.locator("html")).toHaveAttribute("lang", "ja");
   await expect(page.getByRole("heading", { level: 2 }).first()).not.toHaveText(
-    "1. Your class",
+    "Your class",
   );
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "ja");
@@ -249,4 +251,94 @@ test("print sheet lists every pupil and the state of each request", async ({
   await expect(sheet.locator(".print-list li")).toHaveCount(24);
   await expect(sheet.locator(".print-rules")).toContainText("not kept");
   await expect(page.locator(".app")).toBeHidden();
+});
+
+test("clearing the room size to type a new one keeps the requests", async ({
+  page,
+}) => {
+  const rows = page.getByLabel("Rows", { exact: true });
+  await expect(page.locator(".rules .rule")).toHaveCount(10);
+  await rows.click();
+  await rows.press("Control+a");
+  await rows.press("Backspace");
+  await expect(page.locator(".seat")).toHaveCount(30);
+  await expect(page.locator(".rules .rule")).toHaveCount(10);
+  await rows.pressSequentially("4");
+  await expect(page.locator(".seat")).toHaveCount(30);
+  await rows.press("Enter");
+  await expect(page.locator(".seat")).toHaveCount(24);
+  await expect(page.locator(".rules .rule")).toHaveCount(9);
+  await rows.press("ArrowUp");
+  await expect(page.locator(".seat")).toHaveCount(30);
+});
+
+test("a seat can be fixed from the plan without typing numbers", async ({
+  page,
+}) => {
+  await page
+    .locator("select[aria-label='Example class']")
+    .selectOption("ready");
+  const before = await page.locator(".rules .rule").count();
+  await seatOf(page, "Zoe").click();
+  await page.getByRole("button", { name: "Fix Zoe in this seat" }).click();
+  await expect(page.locator(".rules .rule")).toHaveCount(before + 1);
+  await expect(
+    page.locator(".rule", { hasText: "Zoe sits in row" }),
+  ).toHaveCount(1);
+  await expect(
+    page.getByRole("button", { name: "Fix Zoe in this seat" }),
+  ).toHaveCount(0);
+});
+
+test("seats in a conflict say so to a screen reader", async ({ page }) => {
+  await expect(
+    page.getByRole("button", { name: /Maya.*in a conflict/ }),
+  ).toBeVisible();
+});
+
+test.describe("on a phone", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("the verdict is on the first screen", async ({ page }) => {
+    await expect(
+      page.getByText("These 6 requests cannot all hold"),
+    ).toBeInViewport();
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+  });
+});
+
+test("a room size the app has to lower is shown as the real size", async ({
+  page,
+}) => {
+  const rows = page.getByLabel("Rows", { exact: true });
+  const cols = page.getByLabel("Seats per row");
+  await rows.fill("6");
+  await rows.press("Enter");
+  await cols.fill("8");
+  await cols.press("Enter");
+  await expect(page.locator(".seat")).toHaveCount(48);
+  await cols.fill("12");
+  await cols.press("Enter");
+  await expect(page.locator(".seat")).toHaveCount(48);
+  await expect(cols).toHaveValue("8");
+});
+
+test("fixing a seat again moves the earlier fixed seat of that pupil", async ({
+  page,
+}) => {
+  await page
+    .locator("select[aria-label='Example class']")
+    .selectOption("ready");
+  await seatOf(page, "Zoe").click();
+  await page.getByRole("button", { name: "Fix Zoe in this seat" }).click();
+  const rules = page.locator(".rule", { hasText: "Zoe sits in row" });
+  await expect(rules).toHaveCount(1);
+  await seatOf(page, "Ben").click();
+  await seatOf(page, "Zoe").click();
+  await page.getByRole("button", { name: "Fix Zoe in this seat" }).click();
+  await expect(rules).toHaveCount(1);
 });

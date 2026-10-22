@@ -3,6 +3,7 @@ import { useI18n } from "../i18n.tsx";
 import type { Action, NewRule, Project } from "../core/project.ts";
 import { displayNames } from "../core/labels.ts";
 import { describeRule } from "./ruleText.ts";
+import { NumberField } from "./NumberField.tsx";
 import { Icon, type IconName } from "./Icons.tsx";
 
 interface Props {
@@ -156,12 +157,11 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
         {kind === "front" ? (
           <label className="field">
             <span>{t("rules.frontRows")}</span>
-            <input
-              type="number"
+            <NumberField
               min={1}
               max={room.rows}
               value={rows}
-              onChange={(e) => setRows(Number(e.target.value) || 1)}
+              onCommit={setRows}
             />
           </label>
         ) : null}
@@ -169,22 +169,20 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
           <div className="pair">
             <label className="field">
               <span>{t("rules.row")}</span>
-              <input
-                type="number"
+              <NumberField
                 min={1}
                 max={room.rows}
                 value={row}
-                onChange={(e) => setRow(Number(e.target.value) || 1)}
+                onCommit={setRow}
               />
             </label>
             <label className="field">
               <span>{t("rules.seat")}</span>
-              <input
-                type="number"
+              <NumberField
                 min={1}
                 max={room.cols}
                 value={col}
-                onChange={(e) => setCol(Number(e.target.value) || 1)}
+                onCommit={setCol}
               />
             </label>
           </div>

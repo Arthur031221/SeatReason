@@ -53,7 +53,7 @@ const es: Record<keyof typeof en, string> = {
   "repair.changed": "Los asientos que cambian tienen un contorno.",
   "repair.remaining": "Siguen en conflicto: {requests}",
 
-  "class.title": "1. Tu clase",
+  "class.title": "Tu clase",
   "class.name": "Nombre de la clase",
   "class.roster": "Alumnos, un nombre por línea",
   "class.rosterHint":
@@ -69,7 +69,7 @@ const es: Record<keyof typeof en, string> = {
   "class.editRoomHint":
     "Haz clic en un asiento para quitarlo del aula o devolverlo.",
 
-  "rules.title": "2. Tus peticiones",
+  "rules.title": "Tus peticiones",
   "rules.empty":
     "Aún no hay peticiones. Añade una abajo y la comprobación se hará sola.",
   "rules.kind": "Tipo de petición",
@@ -93,7 +93,7 @@ const es: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "Ese asiento no está en el aula.",
   "rules.needPupils": "Añade alumnos primero.",
 
-  "plan.title": "3. El plan",
+  "plan.title": "El plan",
   "plan.front": "Frente del aula",
   "plan.empty": "Asiento libre",
   "plan.blocked": "Aquí no hay pupitre",
@@ -102,6 +102,10 @@ const es: Record<keyof typeof en, string> = {
   "plan.clear": "Borrar el plan",
   "plan.unseated": "Aún sin asiento",
   "plan.unseat": "Quitar a {name} del plan",
+  "plan.pin": "Fijar a {name} en este asiento",
+  "plan.stateFocus": "en un conflicto",
+  "plan.stateChanged": "cambia de asiento en este plan",
+  "plan.stateBroken": "incumple una petición",
   "plan.dragHint":
     "Arrastra un nombre a un asiento, o haz clic en un nombre y luego en un asiento para intercambiar.",
   "plan.selected": "{name} seleccionado. Elige un asiento.",

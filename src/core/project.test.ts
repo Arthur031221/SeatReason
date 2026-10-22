@@ -52,6 +52,62 @@ describe("reduce", () => {
     expect(p.rules.map((r) => r.kind)).toEqual(["front"]);
   });
 
+  it("keeps the pupil, the seat and the rules when a typo in a name is fixed", () => {
+    let p = reduce(emptyProject(), {
+      type: "setRoster",
+      names: ["Noor", "Ravi", "Maya"],
+    });
+    p = reduce(p, {
+      type: "addRule",
+      rule: { kind: "front", pupil: "p1", rows: 1 },
+    });
+    p = reduce(p, { type: "setRoster", names: ["Nour", "Ravi", "Maya"] });
+    expect(p.pupils.map((x) => [x.id, x.name])).toEqual([
+      ["p1", "Nour"],
+      ["p2", "Ravi"],
+      ["p3", "Maya"],
+    ]);
+    expect(p.rules).toHaveLength(1);
+  });
+
+  it("treats a different name on the same line as a new pupil", () => {
+    let p = reduce(emptyProject(), {
+      type: "setRoster",
+      names: ["Noor", "Ravi"],
+    });
+    p = reduce(p, {
+      type: "addRule",
+      rule: { kind: "front", pupil: "p1", rows: 1 },
+    });
+    p = reduce(p, { type: "setRoster", names: ["Zed", "Ravi"] });
+    expect(p.pupils[0]!.id).not.toBe("p1");
+    expect(p.rules).toHaveLength(0);
+    p = reduce(p, { type: "setRoster", names: ["Zed", "Ravi", "Ravo"] });
+    expect(p.pupils.map((x) => x.name)).toEqual(["Zed", "Ravi", "Ravo"]);
+    expect(new Set(p.pupils.map((x) => x.id)).size).toBe(3);
+  });
+
+  it("replaces an earlier fixed seat of the same pupil", () => {
+    let p = reduce(emptyProject(), { type: "setRoster", names: ["A", "B"] });
+    p = reduce(p, {
+      type: "addRule",
+      rule: { kind: "pin", pupil: "p1", seat: 0 },
+    });
+    p = reduce(p, {
+      type: "addRule",
+      rule: { kind: "pin", pupil: "p2", seat: 1 },
+    });
+    p = reduce(p, { type: "pinHere", pupil: "p1", seat: 4 });
+    const pins = p.rules.filter((r) => r.kind === "pin");
+    expect(
+      pins.map((r) => (r.kind === "pin" ? [r.pupil, r.seat] : [])),
+    ).toEqual([
+      ["p2", 1],
+      ["p1", 4],
+    ]);
+    expect(new Set(p.rules.map((r) => r.id)).size).toBe(2);
+  });
+
   it("remaps seats when the room changes shape", () => {
     let p = reduce(emptyProject(), { type: "setRoster", names: ["A", "B"] });
     p = reduce(p, { type: "setRoom", rows: 3, cols: 4 });

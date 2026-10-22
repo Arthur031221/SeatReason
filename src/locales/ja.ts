@@ -53,7 +53,7 @@ const ja: Record<keyof typeof en, string> = {
   "repair.changed": "変わった席は枠で示されます。",
   "repair.remaining": "まだ衝突: {requests}",
 
-  "class.title": "1. クラス",
+  "class.title": "クラス",
   "class.name": "クラス名",
   "class.roster": "生徒の名前（1行に1人）",
   "class.rosterHint":
@@ -69,7 +69,7 @@ const ja: Record<keyof typeof en, string> = {
   "class.editRoomHint":
     "席をクリックすると、教室から外したり戻したりできます。",
 
-  "rules.title": "2. 希望",
+  "rules.title": "希望",
   "rules.empty":
     "希望はまだありません。下から追加すると、確認が自動で始まります。",
   "rules.kind": "希望の種類",
@@ -93,7 +93,7 @@ const ja: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "その席は教室にありません。",
   "rules.needPupils": "先に生徒を追加してください。",
 
-  "plan.title": "3. 座席表",
+  "plan.title": "座席表",
   "plan.front": "教室の前",
   "plan.empty": "空席",
   "plan.blocked": "ここに机はありません",
@@ -102,6 +102,10 @@ const ja: Record<keyof typeof en, string> = {
   "plan.clear": "座席表を消す",
   "plan.unseated": "まだ座っていない生徒",
   "plan.unseat": "{name} を座席表から外す",
+  "plan.pin": "{name} をこの席に固定する",
+  "plan.stateFocus": "衝突している希望に関係",
+  "plan.stateChanged": "この座席表で席が変わる",
+  "plan.stateBroken": "希望を満たしていない",
   "plan.dragHint":
     "名前を席へドラッグするか、名前と席を順にクリックして入れ替えます。",
   "plan.selected": "{name} を選択中です。席を選んでください。",

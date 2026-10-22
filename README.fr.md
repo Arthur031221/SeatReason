@@ -31,7 +31,7 @@ L'exemple "Premier rang trop étroit" : 24 élèves, une salle de 5 sur 6 avec d
 2. **Ajouter des demandes.** Il y en a trois sortes : une place fixe, une place dans les N premiers rangs, et deux élèves qui ne doivent pas être voisins (à gauche, à droite, devant ou derrière). Chacune peut être désactivée sans être supprimée.
 3. **Lire le verdict.** Peu après chaque changement, la vérification se lance seule dans un worker, avec un bouton d'annulation. Elle se termine par résolu, impossible ou non concluant. Impossible vient avec un ensemble minimal de demandes : désactivez n'importe laquelle et le reste tient. SeatReason ne le dit qu'après avoir testé chaque demande de l'ensemble.
 4. **Essayer une réparation.** Chaque demande du conflit dont le retrait permet au reste de tenir a un bouton "Voir ce plan". L'aperçu replanifie sans cette demande et garde les places actuelles quand il le peut. Les places modifiées sont entourées. Le plan n'est remplacé que si vous appuyez sur le bouton qui le dit.
-5. **Ajuster et garder.** Faites glisser des élèves ou cliquez sur deux places pour les échanger. Un déplacement qui brise une demande s'affiche avec sa raison et peut être annulé. La classe est enregistrée dans le navigateur, exportée dans un fichier `.seatreason.json` et imprimée comme plan avec un résumé des demandes.
+5. **Ajuster et garder.** Faites glisser des élèves ou cliquez sur deux places pour les échanger, et fixez un élève à sa place actuelle d'un seul bouton. Un déplacement qui brise une demande s'affiche avec sa raison et peut être annulé. La classe est enregistrée dans le navigateur, exportée dans un fichier `.seatreason.json` et imprimée comme plan avec un résumé des demandes.
 
 ## Fichiers
 
@@ -89,7 +89,7 @@ Lancez `npm ci && npm run build` et téléversez le dossier `dist/`. Tous les ch
 
 ## Utilisation
 
-Ouvrez la page et choisissez "Premier rang trop étroit" dans Classe d'exemple. La liste du conflit apparaît, avec une réparation sous chaque demande.
+La page s'ouvre sur l'exemple "Premier rang trop étroit" : la liste du conflit est déjà là, avec une réparation sous chaque demande. Les autres exemples sont dans Classe d'exemple.
 
 Pour utiliser votre propre classe :
 

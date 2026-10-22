@@ -2,11 +2,11 @@
 
 ## The class
 
-Paste names into "Pupils, one name per line" and press "Update class". For a CSV, the first column is read as the names and a header such as "name" is skipped. Blank lines are dropped and names are trimmed. Two pupils with the same name get separate internal ids, so rules on one do not touch the other. Pressing "Update class" with a changed name makes a new pupil, and that pupil has no seat yet, and the requests that named the old name are removed.
+Paste names into "Pupils, one name per line" and press "Update class". For a CSV, the first column is read as the names and a header such as "name" is skipped. Blank lines are dropped and names are trimmed. Two pupils with the same name get separate internal ids, so rules on one do not touch the other. Pressing "Update class" with a changed name makes a new pupil, and that pupil has no seat yet, and the requests that named the old name are removed. The exception is a corrected typo: a name one or two letters away from the old name on the same line, such as "Nour" for "Noor", keeps the pupil, the seat and the requests.
 
 At most 40 pupils are used. If the list is longer, the page says that only the first 40 were used.
 
-Set "Rows" and "Seats per row" for the room. A room has at most 12 rows, 12 seats per row and 48 seat positions. "Mark missing desks" lets you click a seat to remove it from the room, for a pillar or a door. A pupil sitting in a removed seat becomes unseated. Shrinking the room also removes fixed-seat requests whose seat no longer exists, and "Undo" brings them back.
+Set "Rows" and "Seats per row" for the room. What you type in these boxes is applied when you press Enter or leave the box, or when you step the number with the arrow keys, so clearing a box to type a new number changes nothing on the way. A room has at most 12 rows, 12 seats per row and 48 seat positions. "Mark missing desks" lets you click a seat to remove it from the room, for a pillar or a door. A pupil sitting in a removed seat becomes unseated. Shrinking the room also removes fixed-seat requests whose seat no longer exists, and "Undo" brings them back.
 
 ## The requests
 
@@ -38,7 +38,7 @@ Under each request of a conflict whose removal lets the rest hold, "Show this pl
 
 ## Adjusting by hand
 
-Drag a pupil onto another seat to swap, or click one pupil and then a seat. A move that breaks a request is allowed. The page lists the broken requests and which seats are involved, and Undo reverses the move.
+Drag a pupil onto another seat to swap, or click one pupil and then a seat. With a seated pupil selected, "Fix ... in this seat" adds a fixed-seat request for the current seat, so no row and seat numbers have to be typed. Seats read out whether they are fixed, in a conflict, moved by the previewed plan or breaking a request. A move that breaks a request is allowed. The page lists the broken requests and which seats are involved, and Undo reverses the move.
 
 ## Keeping the work
 

@@ -19,7 +19,7 @@ const en = {
   "theme.dark": "Dark",
   "header.openFailed": "That file is not a SeatReason plan ({reason}).",
 
-  "class.title": "1. Your class",
+  "class.title": "Your class",
   "class.name": "Class name",
   "class.roster": "Pupils, one name per line",
   "class.rosterHint": "Paste a list or a CSV column. Equal names are fine.",
@@ -34,7 +34,7 @@ const en = {
   "class.editRoomHint":
     "Click a seat to take it out of the room or put it back.",
 
-  "rules.title": "2. Your requests",
+  "rules.title": "Your requests",
   "rules.empty": "No requests yet. Add one below and the check runs by itself.",
   "rules.kind": "Kind of request",
   "rules.kindPin": "Fixed seat",
@@ -58,7 +58,7 @@ const en = {
   "rules.blockedSeat": "That seat is not in the room.",
   "rules.needPupils": "Add pupils first.",
 
-  "plan.title": "3. The plan",
+  "plan.title": "The plan",
   "plan.front": "Front of the room",
   "plan.empty": "Empty seat",
   "plan.blocked": "No desk here",
@@ -67,6 +67,10 @@ const en = {
   "plan.clear": "Clear plan",
   "plan.unseated": "Not seated yet",
   "plan.unseat": "Take {name} off the plan",
+  "plan.pin": "Fix {name} in this seat",
+  "plan.stateFocus": "in a conflict",
+  "plan.stateChanged": "moves in this plan",
+  "plan.stateBroken": "breaks a request",
   "plan.dragHint":
     "Drag a name to a seat, or click one name and then a seat to swap.",
   "plan.selected": "{name} selected. Choose a seat.",

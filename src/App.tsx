@@ -305,6 +305,9 @@ export function App() {
                       dispatch({ type: "moveSeat", pupil, seat })
                     }
                     onUnseat={(pupil) => dispatch({ type: "unseat", pupil })}
+                    onPin={(pupil, seat) =>
+                      dispatch({ type: "pinHere", pupil, seat })
+                    }
                     onToggleBlocked={(seat) =>
                       dispatch({ type: "toggleBlocked", seat })
                     }

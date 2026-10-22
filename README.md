@@ -8,7 +8,7 @@ Seating rules that say why they cannot all hold.
 
 Finding a minimal clash that needs the SAT solver takes a median of 18 to 32 ms, slowest 0.38 s. Repair previews for the same cases take a median of 0.26 to 0.49 s. 51 cases, five runs, method under [Measurements](#measurements).
 
-A teacher's requests can be impossible together, and most planners just answer "no solution". SeatReason names the few requests that clash, lets you try dropping each one, and checks everything that's left before the plan changes.
+A teacher's requests can be impossible together, and most planners just say "no solution". SeatReason names the few requests that clash, lets you try dropping each one, and checks everything left over before the plan changes.
 
 ![A conflict in the example class, a repaired plan with changed seats outlined, then a hand-made move that breaks a fixed seat and is undone](assets/demo.gif)
 
@@ -28,10 +28,10 @@ The "Front row squeeze" example: 24 pupils, a 5 by 6 room with two missing desks
 ## How a plan is made
 
 1. **Describe the class.** Paste names or one CSV column, up to 40 pupils. Equal names are kept apart by internal ids. Set the rows and seats per row, then mark missing desks. The room has at most 48 seat positions.
-2. **Add requests.** There are three kinds: a fixed seat, a place in the first N rows, and two pupils who must not sit next to each other (left, right, in front or behind). Each can be switched off without deleting it.
-3. **Read the verdict.** The check runs by itself a moment after every change, in a worker, with a cancel button. It ends as solved, impossible or inconclusive. Impossible comes with a minimal set of requests: switch off any one of them and the rest work. SeatReason only says so after testing every request in the set.
+2. **Add requests.** There are three kinds: a fixed seat, a place in the first N rows, and two pupils who must not sit next to each other (left, right, in front or behind). You can switch any of them off without deleting it.
+3. **Read the verdict.** The check runs by itself a moment after every change, in a worker, with a cancel button. It ends as solved, impossible or inconclusive. An impossible verdict comes with a minimal set of requests: switch off any one of them and the rest work. SeatReason only says so after testing every request in the set.
 4. **Try a repair.** Each request in the clash whose removal lets the rest hold has a "Show this plan" button. The preview plans afresh without that request and keeps the current seats where it can. Changed seats are outlined. The plan is replaced only when you press the button that says so.
-5. **Adjust and keep.** Drag pupils or click two seats to swap. A move that breaks a request is shown with the reason and can be undone. The class is saved in the browser, exported to a `.seatreason.json` file and printed as a chart with a request summary.
+5. **Adjust and keep.** Drag pupils or click two seats to swap, and fix a pupil in the current seat with one button. A move that breaks a request is shown with the reason and can be undone. The class is saved in the browser, exported to a `.seatreason.json` file and printed as a chart with a request summary.
 
 ## Files
 
@@ -89,7 +89,7 @@ Run `npm ci && npm run build` and upload the `dist/` folder. All paths are relat
 
 ## Usage
 
-Open the page and pick "Front row squeeze" under Example class. The conflict list appears, with a repair under each request.
+The page opens on the "Front row squeeze" example, so the conflict list is already there, with a repair under each request. Other examples are under Example class.
 
 To use your own class:
 

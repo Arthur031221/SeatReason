@@ -53,7 +53,7 @@ const ptBR: Record<keyof typeof en, string> = {
   "repair.changed": "Os lugares que mudaram estão contornados.",
   "repair.remaining": "Ainda em conflito: {requests}",
 
-  "class.title": "1. Sua turma",
+  "class.title": "Sua turma",
   "class.name": "Nome da turma",
   "class.roster": "Alunos, um nome por linha",
   "class.rosterHint":
@@ -69,7 +69,7 @@ const ptBR: Record<keyof typeof en, string> = {
   "class.editRoomHint":
     "Clique num lugar para tirá-lo da sala ou colocá-lo de volta.",
 
-  "rules.title": "2. Seus pedidos",
+  "rules.title": "Seus pedidos",
   "rules.empty":
     "Ainda não há pedidos. Adicione um abaixo e a verificação acontece sozinha.",
   "rules.kind": "Tipo de pedido",
@@ -94,7 +94,7 @@ const ptBR: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "Esse lugar não existe na sala.",
   "rules.needPupils": "Adicione alunos primeiro.",
 
-  "plan.title": "3. O mapa",
+  "plan.title": "O mapa",
   "plan.front": "Frente da sala",
   "plan.empty": "Lugar vazio",
   "plan.blocked": "Sem carteira aqui",
@@ -103,6 +103,10 @@ const ptBR: Record<keyof typeof en, string> = {
   "plan.clear": "Limpar o mapa",
   "plan.unseated": "Ainda sem lugar",
   "plan.unseat": "Tirar {name} do mapa",
+  "plan.pin": "Fixar {name} neste lugar",
+  "plan.stateFocus": "em um conflito",
+  "plan.stateChanged": "muda de lugar neste mapa",
+  "plan.stateBroken": "não atende a um pedido",
   "plan.dragHint":
     "Arraste um nome até um lugar, ou clique num nome e depois num lugar para trocar.",
   "plan.selected": "{name} selecionado. Escolha um lugar.",

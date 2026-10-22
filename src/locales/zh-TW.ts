@@ -51,7 +51,7 @@ const zhTW: Record<keyof typeof en, string> = {
   "repair.changed": "有更動的座位以外框標示。",
   "repair.remaining": "仍然衝突：{requests}",
 
-  "class.title": "1. 你的班級",
+  "class.title": "你的班級",
   "class.name": "班級名稱",
   "class.roster": "學生名單，一行一個名字",
   "class.rosterHint": "可貼上名單或 CSV 的一欄。同名也沒問題。",
@@ -65,7 +65,7 @@ const zhTW: Record<keyof typeof en, string> = {
   "class.editRoomDone": "標記完成",
   "class.editRoomHint": "點一下座位，就能把它移出教室或放回來。",
 
-  "rules.title": "2. 你的要求",
+  "rules.title": "你的要求",
   "rules.empty": "還沒有任何要求。在下方加入一項，檢查會自動進行。",
   "rules.kind": "要求的種類",
   "rules.kindPin": "固定座位",
@@ -88,7 +88,7 @@ const zhTW: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "那個位置不在教室裡。",
   "rules.needPupils": "請先加入學生。",
 
-  "plan.title": "3. 座位表",
+  "plan.title": "座位表",
   "plan.front": "教室前方",
   "plan.empty": "空位",
   "plan.blocked": "這裡沒有桌子",
@@ -97,6 +97,10 @@ const zhTW: Record<keyof typeof en, string> = {
   "plan.clear": "清除座位表",
   "plan.unseated": "還沒安排座位",
   "plan.unseat": "把 {name} 移出座位表",
+  "plan.pin": "把 {name} 固定在這個座位",
+  "plan.stateFocus": "涉及衝突",
+  "plan.stateChanged": "在這份座位表中換座",
+  "plan.stateBroken": "違反了要求",
   "plan.dragHint": "把名字拖到座位上，或先點一個名字再點座位來對調。",
   "plan.selected": "已選取 {name}，請選擇座位。",
   "plan.valid": "這份座位表符合所有要求。",

@@ -17,6 +17,7 @@ interface Props {
   readOnly: boolean;
   onMove: (pupil: string, seat: number) => void;
   onUnseat: (pupil: string) => void;
+  onPin: (pupil: string, seat: number) => void;
   onToggleBlocked: (seat: number) => void;
 }
 
@@ -49,9 +50,19 @@ export function SeatMap(props: Props) {
   const label = (seat: number) => {
     const { row, col } = seatPosition(room, seat);
     const who = occupant.get(seat);
-    return who
-      ? t("plan.seatLabelFilled", { row, col, name: names.get(who) ?? "" })
-      : t("plan.seatLabel", { row, col });
+    if (!who) return t("plan.seatLabel", { row, col });
+    const base = t("plan.seatLabelFilled", {
+      row,
+      col,
+      name: names.get(who) ?? "",
+    });
+    const states = [
+      props.pinned.has(seat) && t("plan.pinned"),
+      props.focusPupils.has(who) && t("plan.stateFocus"),
+      props.changed.has(who) && t("plan.stateChanged"),
+      props.broken.has(who) && t("plan.stateBroken"),
+    ].filter(Boolean);
+    return states.length ? `${base} (${states.join(", ")})` : base;
   };
 
   return (
@@ -135,6 +146,7 @@ export function SeatMap(props: Props) {
                     key={id}
                     type="button"
                     className={`chip${selected === id ? " is-selected" : ""}`}
+                    aria-pressed={selected === id}
                     draggable={interactive}
                     onDragStart={(e) =>
                       e.dataTransfer.setData("text/plain", id)
@@ -157,16 +169,30 @@ export function SeatMap(props: Props) {
                   : t("plan.dragHint")}
               </p>
               {selected && plan[selected] !== undefined ? (
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => {
-                    props.onUnseat(selected);
-                    setSelected(null);
-                  }}
-                >
-                  {t("plan.unseat", { name: names.get(selected) ?? "" })}
-                </button>
+                <div className="row">
+                  {props.pinned.has(plan[selected]) ? null : (
+                    <button
+                      type="button"
+                      className="btn"
+                      onClick={() => props.onPin(selected, plan[selected]!)}
+                    >
+                      <Icon name="lock" size={14} />
+                      <span>
+                        {t("plan.pin", { name: names.get(selected) ?? "" })}
+                      </span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => {
+                      props.onUnseat(selected);
+                      setSelected(null);
+                    }}
+                  >
+                    {t("plan.unseat", { name: names.get(selected) ?? "" })}
+                  </button>
+                </div>
               ) : null}
             </div>
           ) : null}

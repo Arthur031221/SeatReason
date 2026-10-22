@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0
+
+- Room size boxes apply on Enter or blur, so clearing a box to type a new number no longer shrinks the room and drops fixed seats on the way
+- A corrected typo in a name keeps the pupil, the seat and the requests
+- "Fix in this seat" button for the selected pupil
+- Seats are announced as fixed, in a conflict, moved or breaking a request
+- Only the one-line verdict is a live region, and unseated names report their pressed state
+- On a phone the plan and the verdict come first
+- Panel titles lose their numbers, in all nine languages
+
 ## 0.1.0
 
 First release.

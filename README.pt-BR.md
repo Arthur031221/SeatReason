@@ -31,7 +31,7 @@ O exemplo "Aperto na primeira fileira": 24 alunos, uma sala de 5 por 6 com duas 
 2. **Adicione pedidos.** Há três tipos: um assento fixo, um lugar nas primeiras N fileiras e dois alunos que não podem sentar um ao lado do outro (à esquerda, à direita, na frente ou atrás). Cada um pode ser desativado sem ser apagado.
 3. **Leia o veredito.** Pouco depois de cada mudança, a verificação roda sozinha em um worker, com botão de cancelar. Ela termina como resolvido, impossível ou inconclusivo. Impossível vem com um conjunto mínimo de pedidos: desative qualquer um deles e o resto funciona. O SeatReason só diz isso depois de testar cada pedido do conjunto.
 4. **Experimente um reparo.** Cada pedido no conflito cuja retirada deixa o resto valer tem um botão "Ver este mapa". A prévia planeja de novo sem esse pedido e mantém os assentos atuais onde der. Os assentos alterados ficam contornados. O mapa só é substituído quando você aperta o botão que diz isso.
-5. **Ajuste e guarde.** Arraste alunos ou clique em dois assentos para trocá-los. Um movimento que quebra um pedido aparece com o motivo e pode ser desfeito. A turma é salva no navegador, exportada para um arquivo `.seatreason.json` e impressa como mapa com um resumo dos pedidos.
+5. **Ajuste e guarde.** Arraste alunos ou clique em dois assentos para trocá-los, e fixe um aluno no lugar atual com um botão. Um movimento que quebra um pedido aparece com o motivo e pode ser desfeito. A turma é salva no navegador, exportada para um arquivo `.seatreason.json` e impressa como mapa com um resumo dos pedidos.
 
 ## Arquivos
 
@@ -89,7 +89,7 @@ Execute `npm ci && npm run build` e envie a pasta `dist/`. Todos os caminhos sã
 
 ## Uso
 
-Abra a página e escolha "Aperto na primeira fileira" em Turma de exemplo. A lista do conflito aparece, com um reparo sob cada pedido.
+A página abre no exemplo "Aperto na primeira fileira", então a lista do conflito já está lá, com um reparo sob cada pedido. Os outros exemplos ficam em Turma de exemplo.
 
 Para usar a sua própria turma:
 

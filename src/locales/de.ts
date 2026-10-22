@@ -57,7 +57,7 @@ const de: Record<keyof typeof en, string> = {
   "repair.changed": "Geänderte Plätze sind umrandet.",
   "repair.remaining": "Weiterhin im Konflikt: {requests}",
 
-  "class.title": "1. Ihre Klasse",
+  "class.title": "Ihre Klasse",
   "class.name": "Name der Klasse",
   "class.roster": "Schüler, ein Name pro Zeile",
   "class.rosterHint":
@@ -73,7 +73,7 @@ const de: Record<keyof typeof en, string> = {
   "class.editRoomHint":
     "Klicken Sie auf einen Platz, um ihn aus dem Raum zu nehmen oder wieder einzusetzen.",
 
-  "rules.title": "2. Ihre Wünsche",
+  "rules.title": "Ihre Wünsche",
   "rules.empty":
     "Noch keine Wünsche. Fügen Sie unten einen hinzu, die Prüfung läuft von selbst.",
   "rules.kind": "Art des Wunsches",
@@ -97,7 +97,7 @@ const de: Record<keyof typeof en, string> = {
   "rules.blockedSeat": "Dieser Platz gehört nicht zum Raum.",
   "rules.needPupils": "Fügen Sie zuerst Schüler hinzu.",
 
-  "plan.title": "3. Der Plan",
+  "plan.title": "Der Plan",
   "plan.front": "Vorderseite des Raums",
   "plan.empty": "Freier Platz",
   "plan.blocked": "Hier steht kein Tisch",
@@ -106,6 +106,10 @@ const de: Record<keyof typeof en, string> = {
   "plan.clear": "Plan löschen",
   "plan.unseated": "Noch ohne Platz",
   "plan.unseat": "{name} aus dem Plan nehmen",
+  "plan.pin": "{name} auf diesem Platz festlegen",
+  "plan.stateFocus": "in einem Konflikt",
+  "plan.stateChanged": "wechselt in diesem Plan den Platz",
+  "plan.stateBroken": "verletzt einen Wunsch",
   "plan.dragHint":
     "Ziehen Sie einen Namen auf einen Platz, oder klicken Sie erst einen Namen und dann einen Platz an, um zu tauschen.",
   "plan.selected": "{name} ausgewählt. Wählen Sie einen Platz.",

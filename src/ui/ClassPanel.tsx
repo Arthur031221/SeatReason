@@ -3,6 +3,7 @@ import { useI18n } from "../i18n.tsx";
 import { MAX_SIDE, parseRoster, type Project } from "../core/project.ts";
 import { MAX_PUPILS } from "../core/problem.ts";
 import type { Action } from "../core/project.ts";
+import { NumberField } from "./NumberField.tsx";
 import { Icon } from "./Icons.tsx";
 
 interface Props {
@@ -27,8 +28,7 @@ export function ClassPanel({ project, editRoom, onEditRoom, dispatch }: Props) {
     setText(names.join("\n"));
   };
   const dirty = text !== joined;
-  const size = (key: "rows" | "cols", value: string) => {
-    const n = Math.max(1, Math.min(MAX_SIDE, Math.floor(Number(value)) || 1));
+  const size = (key: "rows" | "cols", n: number) => {
     dispatch({
       type: "setRoom",
       rows: key === "rows" ? n : project.room.rows,
@@ -78,22 +78,20 @@ export function ClassPanel({ project, editRoom, onEditRoom, dispatch }: Props) {
         <legend>{t("class.room")}</legend>
         <label className="field inline">
           <span>{t("class.rows")}</span>
-          <input
-            type="number"
+          <NumberField
             min={1}
             max={MAX_SIDE}
             value={project.room.rows}
-            onChange={(e) => size("rows", e.target.value)}
+            onCommit={(n) => size("rows", n)}
           />
         </label>
         <label className="field inline">
           <span>{t("class.cols")}</span>
-          <input
-            type="number"
+          <NumberField
             min={1}
             max={MAX_SIDE}
             value={project.room.cols}
-            onChange={(e) => size("cols", e.target.value)}
+            onCommit={(n) => size("cols", n)}
           />
         </label>
         <button
