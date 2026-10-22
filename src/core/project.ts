@@ -1,6 +1,7 @@
 import {
   MAX_PUPILS,
   MAX_SEATS,
+  isRowRule,
   rulePupils,
   seatCount,
   type Plan,
@@ -26,6 +27,7 @@ export interface Project {
 export type NewRule =
   | { kind: "pin"; pupil: string; seat: number }
   | { kind: "front"; pupil: string; rows: number }
+  | { kind: "back"; pupil: string; rows: number }
   | { kind: "apart"; a: string; b: string }
   | { kind: "together"; a: string; b: string };
 
@@ -179,7 +181,7 @@ function resize(project: Project, rows: number, cols: number): Project {
   }
   const rules: Rule[] = [];
   for (const rule of project.rules) {
-    if (rule.kind === "front") {
+    if (isRowRule(rule)) {
       rules.push({ ...rule, rows: Math.min(rule.rows, rows) });
       continue;
     }
@@ -305,6 +307,8 @@ function cleanRule(rule: Rule): Rule {
       return { ...base, kind: "pin", pupil: rule.pupil, seat: rule.seat };
     case "front":
       return { ...base, kind: "front", pupil: rule.pupil, rows: rule.rows };
+    case "back":
+      return { ...base, kind: "back", pupil: rule.pupil, rows: rule.rows };
     case "apart":
       return { ...base, kind: "apart", a: rule.a, b: rule.b };
     case "together":
@@ -368,7 +372,7 @@ export function parseProject(value: unknown): Project {
         (r.seat as number) < total
       );
     }
-    if (r.kind === "front") {
+    if (r.kind === "front" || r.kind === "back") {
       return (
         ids.has(r.pupil as string) &&
         Number.isInteger(r.rows) &&

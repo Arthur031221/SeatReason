@@ -1,13 +1,16 @@
-import { usableSeats, rowOf, type Problem } from "./problem.ts";
+import { usableSeats, inRowBand, isRowRule, type Problem } from "./problem.ts";
 
 /**
- * Pins and front-row requests only narrow which seats a pupil may take, so
+ * Pins, front-row and back-row requests only narrow which seats a pupil may take, so
  * checking them is bipartite matching: polynomial and exact. Doing it apart
  * from the SAT search matters, because a crowd of pupils competing for a few
  * seats is the case SAT solvers refute slowest.
  */
 
-type SeatRule = Extract<Problem["rules"][number], { kind: "pin" | "front" }>;
+type SeatRule = Extract<
+  Problem["rules"][number],
+  { kind: "pin" | "front" | "back" }
+>;
 
 function domains(
   problem: Problem,
@@ -21,7 +24,7 @@ function domains(
       const allowed =
         rule.kind === "pin"
           ? seat === rule.seat
-          : rowOf(problem.room, seat) < rule.rows;
+          : inRowBand(problem.room, rule, seat);
       if (!allowed) current.delete(seat);
     }
     out.set(rule.pupil, current);
@@ -57,13 +60,13 @@ function seatRules(problem: Problem, ids?: Set<string>): SeatRule[] {
   return problem.rules.filter(
     (r): r is SeatRule =>
       r.enabled &&
-      (r.kind === "pin" || r.kind === "front") &&
+      (r.kind === "pin" || isRowRule(r)) &&
       (!ids || ids.has(r.id)),
   );
 }
 
 /**
- * Looks for a set of enabled pin and front rules that cannot hold together,
+ * Looks for a set of enabled pin, front and back rules that cannot hold together,
  * ignoring the pair rules. Returns a subset-minimal such set, or null when
  * the seat rules alone are satisfiable.
  */

@@ -39,8 +39,11 @@ function randomProblem(random: () => number): Problem {
           seat: Math.floor(random() * total),
         };
       }
-      if (roll < 0.5) {
+      if (roll < 0.4) {
         return { ...base, kind: "front", pupil: pick(), rows: 1 };
+      }
+      if (roll < 0.5) {
+        return { ...base, kind: "back", pupil: pick(), rows: 1 };
       }
       const a = pick();
       let b = pick();
@@ -87,6 +90,30 @@ describe("plan", () => {
     }
     expect(solved).toBeGreaterThan(30);
     expect(conflicts).toBeGreaterThan(30);
+  });
+
+  it("names a pupil asked to sit in the front row and in the back row", () => {
+    const problem: Problem = {
+      room: { rows: 3, cols: 2, blocked: [] },
+      pupils: ["a", "b", "c"].map((id) => ({ id, name: id })),
+      rules: [
+        { id: "f", kind: "front", pupil: "a", rows: 1, enabled: true },
+        { id: "k", kind: "back", pupil: "a", rows: 1, enabled: true },
+        { id: "o", kind: "back", pupil: "b", rows: 1, enabled: true },
+      ],
+    };
+    expect(plan(problem)).toMatchObject({
+      status: "conflict",
+      minimal: true,
+      rules: ["f", "k"],
+    });
+    const wide = { ...problem, rules: problem.rules.slice(1) };
+    const outcome = plan(wide);
+    expect(outcome.status).toBe("solved");
+    if (outcome.status === "solved") {
+      expect(outcome.plan.a).toBeGreaterThanOrEqual(4);
+      expect(outcome.plan.b).toBeGreaterThanOrEqual(4);
+    }
   });
 
   it("names a pair that must sit together and also apart", () => {

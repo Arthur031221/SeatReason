@@ -224,6 +224,21 @@ describe("room changes and hostile files", () => {
     );
   });
 
+  it("keeps a back-row request through a file and a smaller room", () => {
+    let project = exampleProject("squeeze");
+    project = reduce(project, {
+      type: "addRule",
+      rule: { kind: "back", pupil: project.pupils[0].id, rows: 4 },
+    });
+    const reopened = parseProject(JSON.parse(serializeProject(project)));
+    expect(reopened.rules.at(-1)).toMatchObject({ kind: "back", rows: 4 });
+    const smaller = reduce(project, { type: "setRoom", rows: 3, cols: 6 });
+    expect(smaller.rules.at(-1)).toMatchObject({ kind: "back", rows: 3 });
+    const bad = JSON.parse(serializeProject(project));
+    bad.rules.at(-1).rows = 0;
+    expect(() => parseProject(bad)).toThrow("bad rules");
+  });
+
   it("refuses pupil ids that collide with object properties", () => {
     const file = JSON.parse(serializeProject(emptyProject()));
     file.pupils = [{ id: "toString", name: "Ana" }];

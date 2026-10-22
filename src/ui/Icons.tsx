@@ -10,6 +10,7 @@ const paths = {
   warn: "M12 4 3 20h18zM12 10v4M12 17v.5",
   cross: "m6 6 12 12M18 6 6 18",
   front: "M4 5h16M7 10h10M7 15h10M7 20h10",
+  back: "M4 20h16M7 15h10M7 10h10M7 5h10",
   apart: "M5 9h4v6H5zM15 9h4v6h-4zM11 12h2",
   together: "M4 9h8v6H4zM12 9h8v6h-8z",
   pin: "M12 3v9m-4 0h8m-4 0v9",

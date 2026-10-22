@@ -28,7 +28,7 @@ O exemplo "Aperto na primeira fileira": 24 alunos, uma sala de 5 por 6 com duas 
 ## Como um mapa é feito
 
 1. **Descreva a turma.** Cole nomes ou uma coluna CSV, até 40 alunos. Nomes iguais são separados por ids internos. Defina as fileiras e os assentos por fileira e marque as carteiras que faltam. A sala tem no máximo 48 assentos.
-2. **Adicione pedidos.** Há quatro tipos: um assento fixo, um lugar nas primeiras N fileiras, dois alunos que não podem sentar um ao lado do outro e dois que devem sentar (à esquerda, à direita, na frente ou atrás). Cada um pode ser desativado sem ser apagado.
+2. **Adicione pedidos.** Há cinco tipos: um assento fixo, um lugar nas primeiras N fileiras, um lugar nas últimas N fileiras, dois alunos que não podem sentar um ao lado do outro e dois que devem sentar (à esquerda, à direita, na frente ou atrás). Cada um pode ser desativado sem ser apagado.
 3. **Leia o veredito.** Pouco depois de cada mudança, a verificação roda sozinha em um worker, com botão de cancelar. Ela termina como resolvido, impossível ou inconclusivo. Impossível vem com um conjunto mínimo de pedidos: desative qualquer um deles e o resto funciona. O SeatReason só diz isso depois de testar cada pedido do conjunto.
 4. **Experimente um reparo.** Cada pedido no conflito cuja retirada deixa o resto valer tem um botão "Ver este mapa". A prévia planeja de novo sem esse pedido e mantém os assentos atuais onde der. Os assentos alterados ficam contornados. O mapa só é substituído quando você aperta o botão que diz isso.
 5. **Ajuste e guarde.** Arraste alunos ou clique em dois assentos para trocá-los, e fixe um aluno no lugar atual com um botão. Um movimento que quebra um pedido aparece com o motivo e pode ser desfeito. A turma é salva no navegador, exportada para um arquivo `.seatreason.json` e impressa como mapa com um resumo dos pedidos.
@@ -128,7 +128,7 @@ Os testes comparam o resolvedor com uma busca exaustiva em salas pequenas. Tamb�
 - Um conjunto com muitos pares a separar entre si em uma sala apertada pode ser difícil demais para o limite de 8 segundos. A página então diz "inconclusivo" e não afirma que as regras são impossíveis. Nove alunos que devem ficar todos afastados em uma sala de 4 por 4 são um caso assim.
 - Separar significa vizinhos ortogonais. Assentos na diagonal são permitidos. Sentar juntos exige o mesmo tipo de vizinho, então um assento na diagonal não conta.
 - A prévia de reparo tenta um pedido por vez. Ela não busca o reparo que altera menos assentos.
-- Existem só quatro tipos de pedido. Não há equilíbrio de gênero, grupos nem rodízio.
+- Existem só cinco tipos de pedido. Não há equilíbrio de gênero, grupos nem rodízio.
 
 ## Princípios de projeto
 

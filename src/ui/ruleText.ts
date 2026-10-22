@@ -22,6 +22,10 @@ export function describeRule(
       return rule.rows === 1
         ? t("rules.front1", { name: name(rule.pupil) })
         : t("rules.frontN", { name: name(rule.pupil), rows: rule.rows });
+    case "back":
+      return rule.rows === 1
+        ? t("rules.back1", { name: name(rule.pupil) })
+        : t("rules.backN", { name: name(rule.pupil), rows: rule.rows });
     case "apart":
       return t("rules.apart", { a: name(rule.a), b: name(rule.b) });
     case "together":

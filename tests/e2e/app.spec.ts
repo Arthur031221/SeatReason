@@ -227,6 +227,27 @@ test("a pair asked to sit together and apart is named as a clash", async ({
   );
 });
 
+test("a pupil asked for the front and the back row is named as a clash", async ({
+  page,
+}) => {
+  await page
+    .locator("select[aria-label='Example class']")
+    .selectOption("ready");
+  const form = page.locator(".rule-form");
+  await form.getByLabel("Kind of request").selectOption("front");
+  await form.locator("select").nth(1).selectOption({ label: "Hana" });
+  await form.getByRole("button", { name: "Add request" }).click();
+  await form.getByLabel("Kind of request").selectOption("back");
+  await form.locator("select").nth(1).selectOption({ label: "Hana" });
+  await form.getByRole("button", { name: "Add request" }).click();
+  await expect(
+    page.getByText("These 2 requests cannot all hold"),
+  ).toBeVisible();
+  const clash = page.locator(".status");
+  await expect(clash).toContainText("Hana sits in the front row");
+  await expect(clash).toContainText("Hana sits in the back row");
+});
+
 test("a search that is cancelled is not reported as impossible", async ({
   page,
 }, info) => {

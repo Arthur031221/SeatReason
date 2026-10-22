@@ -12,7 +12,7 @@ A teacher's requests can be impossible together, and most planners just say "no 
 
 ![A conflict in the example class, a repaired plan with changed seats outlined, then a hand-made move that breaks a fixed seat and is undone](assets/demo.gif)
 
-It's a static web app. Names stay in the browser and nothing is uploaded. After the first visit it opens without a network, and your browser can install it as an app.
+It's a static web app. Names stay in the browser and nothing is uploaded. After the first visit it opens offline, and your browser can install it as an app.
 
 ## Before and after
 
@@ -28,7 +28,7 @@ The "Front row squeeze" example: 24 pupils, a 5 by 6 room with two missing desks
 ## How a plan is made
 
 1. **Describe the class.** Paste names or one CSV column, up to 40 pupils. Equal names are kept apart by internal ids. Set the rows and seats per row, then mark missing desks. The room has at most 48 seat positions.
-2. **Add requests.** There are four kinds: a fixed seat, a place in the first N rows, two pupils who must not sit next to each other, and two pupils who must (left, right, in front or behind). You can switch any of them off without deleting it.
+2. **Add requests.** There are five kinds: a fixed seat, a place in the first N rows, a place in the last N rows, two pupils who must not sit next to each other, and two pupils who must (left, right, in front or behind). You can switch any of them off without deleting it.
 3. **Read the verdict.** The check runs by itself a moment after every change, in a worker, with a cancel button. It ends as solved, impossible or inconclusive. An impossible verdict comes with a minimal set of requests: switch off any one of them and the rest work. SeatReason only says so after testing every request in the set.
 4. **Try a repair.** Each request in the clash whose removal lets the rest hold has a "Show this plan" button. The preview plans afresh without that request and keeps the current seats where it can. Changed seats are outlined. The plan is replaced only when you press the button that says so.
 5. **Adjust and keep.** Drag pupils or click two seats to swap, and fix a pupil in the current seat with one button. A move that breaks a request is shown with the reason and can be undone. The class is saved in the browser, exported to a `.seatreason.json` file and printed as a chart with a request summary.
@@ -39,7 +39,7 @@ The "Front row squeeze" example: 24 pupils, a 5 by 6 room with two missing desks
 | ----------------------------- | ---------------------------------------------------------------------------------- |
 | `src/core/sat.ts`             | Conflict-driven SAT solver with assumptions, a conflict budget and a stop callback |
 | `src/core/encode.ts`          | Turns seating rules into clauses, one selector per request                         |
-| `src/core/hall.ts`            | Matching and Hall violators for fixed seats and front rows                         |
+| `src/core/hall.ts`            | Matching and Hall violators for fixed seats, front rows and back rows              |
 | `src/core/analyze.ts`         | Planning, minimal conflict extraction and repair previews                          |
 | `src/core/validate.ts`        | Independent plan checker used by the app and the tests                             |
 | `src/core/oracle.ts`          | Exhaustive search used only by the tests                                           |
@@ -128,7 +128,7 @@ The tests compare the solver with an exhaustive search on small rooms. They also
 - A request set of many mutual keep-apart pairs in a tight room can be too hard for the 8 second limit. The page then says "inconclusive" and doesn't claim the rules are impossible. Nine pupils who must all be kept apart in a 4 by 4 room is one such case.
 - Keep apart means orthogonal neighbours. Diagonal seats are allowed. Sit together needs the same kind of neighbour, so a diagonal seat doesn't count.
 - The repair preview tries one request at a time. It doesn't search for the repair that changes the fewest seats.
-- Only four kinds of request exist. There's no gender balance, no group seating and no rotation. Sitting together means next to each other, not in the same group.
+- Only five kinds of request exist. There's no gender balance, no group seating and no rotation. Sitting together means next to each other, not in the same group.
 
 ## Design principles
 

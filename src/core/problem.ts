@@ -34,6 +34,13 @@ export interface FrontRule extends RuleBase {
   rows: number;
 }
 
+export interface BackRule extends RuleBase {
+  kind: "back";
+  pupil: string;
+  /** The pupil must sit in one of the last `rows` rows. */
+  rows: number;
+}
+
 export interface ApartRule extends RuleBase {
   kind: "apart";
   a: string;
@@ -46,7 +53,20 @@ export interface TogetherRule extends RuleBase {
   b: string;
 }
 
-export type Rule = PinRule | FrontRule | ApartRule | TogetherRule;
+export type Rule = PinRule | FrontRule | BackRule | ApartRule | TogetherRule;
+
+/** A request that keeps one pupil inside a band of rows. */
+export type RowRule = FrontRule | BackRule;
+
+export function isRowRule(rule: Rule): rule is RowRule {
+  return rule.kind === "front" || rule.kind === "back";
+}
+
+/** Whether a seat lies in the rows a front or back request allows. */
+export function inRowBand(room: Room, rule: RowRule, seat: number): boolean {
+  const row = Math.floor(seat / room.cols);
+  return rule.kind === "front" ? row < rule.rows : row >= room.rows - rule.rows;
+}
 
 /** The pupils a rule is about. */
 export function rulePupils(rule: Rule): string[] {

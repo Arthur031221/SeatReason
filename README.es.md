@@ -28,7 +28,7 @@ El ejemplo "Apretados en la primera fila": 24 alumnos, un aula de 5 por 6 con do
 ## Cómo se hace un plan
 
 1. **Describe la clase.** Pega nombres o una columna CSV, hasta 40 alumnos. Los nombres iguales se distinguen con ids internos. Fija las filas y los asientos por fila y marca los pupitres que faltan. El aula tiene como máximo 48 asientos.
-2. **Añade peticiones.** Hay cuatro tipos: un asiento fijo, un sitio en las primeras N filas, dos alumnos que no deben sentarse juntos y dos que sí deben (a izquierda, derecha, delante o detrás). Cada una se puede desactivar sin borrarla.
+2. **Añade peticiones.** Hay cinco tipos: un asiento fijo, un sitio en las primeras N filas, un sitio en las últimas N filas, dos alumnos que no deben sentarse juntos y dos que sí deben (a izquierda, derecha, delante o detrás). Cada una se puede desactivar sin borrarla.
 3. **Lee el veredicto.** Poco después de cada cambio, la comprobación se ejecuta sola en un worker, con un botón para cancelar. Termina como resuelto, imposible o no concluyente. Imposible viene con un conjunto mínimo de peticiones: si desactivas cualquiera de ellas, el resto se puede cumplir. SeatReason solo lo afirma después de probar cada petición del conjunto.
 4. **Prueba una reparación.** Cada petición del conflicto cuya retirada deja que el resto se cumpla tiene un botón "Ver este plan". La vista previa planifica de nuevo sin esa petición y conserva los asientos actuales donde puede. Los asientos cambiados llevan un borde. El plan solo se reemplaza cuando pulsas el botón que lo dice.
 5. **Ajusta y guarda.** Arrastra alumnos o pulsa dos asientos para intercambiarlos, y fija a un alumno en su asiento actual con un botón. Un movimiento que rompe una petición se muestra con el motivo y se puede deshacer. La clase se guarda en el navegador, se exporta a un archivo `.seatreason.json` y se imprime como plano con un resumen de peticiones.
@@ -128,7 +128,7 @@ Las pruebas comparan el resolutor con una búsqueda exhaustiva en aulas pequeña
 - Un conjunto de muchas parejas que separar entre sí en un aula estrecha puede ser demasiado difícil para el límite de 8 segundos. La página dice entonces "no concluyente" y no afirma que las reglas sean imposibles. Nueve alumnos que deben estar todos separados en un aula de 4 por 4 es un caso así.
 - Separar significa vecinos ortogonales. Los asientos en diagonal están permitidos. Sentar juntos exige el mismo tipo de vecino, así que un asiento en diagonal no cuenta.
 - La vista previa de reparación prueba una petición cada vez. No busca la reparación que cambie menos asientos.
-- Solo existen cuatro tipos de petición. No hay equilibrio de género, ni grupos ni rotación.
+- Solo existen cinco tipos de petición. No hay equilibrio de género, ni grupos ni rotación.
 
 ## Principios de diseño
 

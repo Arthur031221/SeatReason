@@ -7,7 +7,7 @@ React UI  ->  history reducer  ->  Project (room, pupils, rules, plan)
    +----------------------->  worker  ->  analyze.plan / repairOptions
                                               |        |
                                               v        v
-                                      hall.ts (pins, front rows)
+                                      hall.ts (pins, front and back rows)
                                       encode.ts + sat.ts (keep apart, sit together)
 ```
 
@@ -15,7 +15,7 @@ React UI  ->  history reducer  ->  Project (room, pupils, rules, plan)
 
 `plan(problem, limits)` in `src/core/analyze.ts` returns one of four results: `solved` with a plan, `capacity` when there are more pupils than seats, `conflict` with a list of request ids and a `minimal` flag, or `inconclusive` with the reason.
 
-1. Fixed seats and front rows are a bipartite matching problem. `hall.ts` first checks them alone. If it finds a Hall violator, a set of requests that compete for fewer seats than they need, that set is the conflict.
+1. Fixed seats, front rows and back rows are a bipartite matching problem. `hall.ts` first checks them alone. If it finds a Hall violator, a set of requests that compete for fewer seats than they need, that set is the conflict.
 2. Otherwise every enabled request goes to the SAT solver in `sat.ts`, which is the only place keep-apart and sit-together rules are handled. A sit-together rule says that wherever the first pupil sits, the second pupil takes one of the seats next to it. The encoding in `encode.ts` has one variable per seat for each pupil named in a request, exactly-one constraints per pupil, at-most-one per seat, and one selector literal per request that guards that request's clauses. Pupils no request names take the leftover seats.
 3. When the solver is unsatisfiable under all selectors, the failed assumptions are a conflict set. Deletion then tries to remove each request from the set. A request is dropped if the rest are still unsatisfiable. `minimal` is true only when no solver call in this pass gave up.
 

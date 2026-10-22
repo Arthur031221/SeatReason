@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+- New request "Near the back": a pupil who must sit in the last N rows, with the same minimal conflict and repair previews as the other kinds
+- A pupil asked for the front row and the back row is named as a clash of exactly those two requests
+- Project files from 0.4.0 open unchanged
+
 ## 0.4.0
 
 - The app opens without a network after the first visit, and can be installed from the browser

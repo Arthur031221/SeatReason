@@ -1,6 +1,6 @@
 import {
   areAdjacent,
-  rowOf,
+  inRowBand,
   type Plan,
   type Problem,
   type Rule,
@@ -13,7 +13,7 @@ export type Violation =
   | { type: "unseated"; pupil: string };
 
 /**
- * Whether a plan satisfies one rule. A fixed-seat or front-row rule about an
+ * Whether a plan satisfies one rule. A fixed-seat, front-row or back-row rule about an
  * unseated pupil is not satisfied, nor is a sit-together rule. A keep-apart rule is, since that pupil has
  * no seat to be near.
  */
@@ -22,9 +22,10 @@ export function ruleHolds(problem: Problem, plan: Plan, rule: Rule): boolean {
   switch (rule.kind) {
     case "pin":
       return plan[rule.pupil] === rule.seat;
-    case "front": {
+    case "front":
+    case "back": {
       const seat = plan[rule.pupil];
-      return seat !== undefined && rowOf(room, seat) < rule.rows;
+      return seat !== undefined && inRowBand(room, rule, seat);
     }
     case "apart": {
       const a = plan[rule.a];

@@ -1,5 +1,7 @@
 import {
   adjacentPairs,
+  inRowBand,
+  isRowRule,
   rulePupils,
   usableSeats,
   type Plan,
@@ -49,9 +51,9 @@ export class Encoding {
       if (rule.kind === "pin") {
         const v = this.var(rule.pupil, rule.seat);
         this.solver.addClause(v === undefined ? [-sel] : [-sel, v]);
-      } else if (rule.kind === "front") {
+      } else if (isRowRule(rule)) {
         for (const seat of seats) {
-          if (Math.floor(seat / room.cols) >= rule.rows) {
+          if (!inRowBand(room, rule, seat)) {
             this.solver.addClause([-sel, -this.var(rule.pupil, seat)!]);
           }
         }

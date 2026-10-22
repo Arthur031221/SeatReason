@@ -14,6 +14,7 @@ Set "Rows" and "Seats per row" for the room. What you type in these boxes is app
 | -------------- | ------------------------------------------------------------------- |
 | Fixed seat     | The pupil sits in the given row and seat                            |
 | Near the front | The pupil sits in the first N rows                                  |
+| Near the back  | The pupil sits in the last N rows                                   |
 | Keep apart     | Two pupils do not sit left, right, in front of or behind each other |
 | Sit together   | Two pupils sit left, right, in front of or behind each other        |
 

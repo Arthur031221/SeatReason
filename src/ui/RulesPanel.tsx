@@ -15,6 +15,7 @@ interface Props {
 const ICONS: Record<string, IconName> = {
   pin: "pin",
   front: "front",
+  back: "back",
   apart: "apart",
   together: "together",
 };
@@ -47,7 +48,7 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
       const seat = (r - 1) * room.cols + (c - 1);
       if (room.blocked.includes(seat)) return setError(t("rules.blockedSeat"));
       dispatch({ type: "addRule", rule: { kind, pupil: chosen, seat } });
-    } else if (kind === "front") {
+    } else if (kind === "front" || kind === "back") {
       dispatch({
         type: "addRule",
         rule: {
@@ -131,6 +132,7 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
             onChange={(e) => setKind(e.target.value as NewRule["kind"])}
           >
             <option value="front">{t("rules.kindFront")}</option>
+            <option value="back">{t("rules.kindBack")}</option>
             <option value="apart">{t("rules.kindApart")}</option>
             <option value="together">{t("rules.kindTogether")}</option>
             <option value="pin">{t("rules.kindPin")}</option>
@@ -156,9 +158,11 @@ export function RulesPanel({ project, inConflict, dispatch }: Props) {
             </select>
           </label>
         ) : null}
-        {kind === "front" ? (
+        {kind === "front" || kind === "back" ? (
           <label className="field">
-            <span>{t("rules.frontRows")}</span>
+            <span>
+              {t(kind === "front" ? "rules.frontRows" : "rules.backRows")}
+            </span>
             <NumberField
               min={1}
               max={room.rows}
